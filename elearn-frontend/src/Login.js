@@ -65,8 +65,8 @@ export default function Login() {
                 <div className='login-form'>
                     <div className='login-form-title'>Login Form</div>
                     <form onSubmit={handleSubmit}>
-                        <div class="login-form-item">
-                            <input className="width-adjust"
+                        <div className="login-form-item">
+                            <input className="login-input"
                                 type="text"
                                 id="username"
                                 ref={userRef}
@@ -78,7 +78,7 @@ export default function Login() {
                             />
                         </div>
                         <div className='login-form-item'>
-                            <input className="width-adjust"
+                            <input className="login-input"
                                 type="password"
                                 id="password"
                                 onChange={(e) => setPwd(e.target.value)}
@@ -87,8 +87,8 @@ export default function Login() {
                                 required
                             />
                         </div>
-                        <div class='login-form-item'>
-                            <button class="login-button">Login</button>                      
+                        <div className='login-form-item'>
+                            <button className="login-button">Login</button>                      
                         </div>
                     </form>
                     <div className='login-form-item'>
