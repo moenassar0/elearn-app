@@ -6,6 +6,35 @@ import { Navigate } from 'react-router-dom';
 
 
 export default function Login() {
+    const userRef = useRef();
+    const errRef = useRef();
+
+    const [user, setUser] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    const [isAdmin, setAdmin] = useState(false);
+    const [user_type, setUserType] = useState('');
+    
+
+    useEffect(() => {
+        userRef.current.focus();
+    }, [])
+
+    useEffect(() => {
+        setErrMsg('');
+    }, [user, pwd])
+
+    const [navigate, setNavigate] = useState(false);
+
+    if(navigate && user_type == 'Admin'){
+        return <Navigate to="/admin" />;
+    }
+    else if(navigate && user_type == 'Instructor'){
+        return <Navigate to="/instructor" />;
+    }
+
+
+
     return (
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
