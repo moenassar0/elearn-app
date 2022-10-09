@@ -13,7 +13,13 @@ export function AdminNavBar() {
                 <div><Link className='navbar-item-link' to="/admin/users">Users</Link></div>
             
         </div>
-
+        <div className='navbar-item'>
+        <div ><img className='img-resize' src='../../images/courses_icon.svg'></img></div>
+            <div><Link className='navbar-item-link' to="/admin/courses">Courses</Link></div>
+        </div>
+        <div className='logout-div'>
+            <button>Logout</button>
+        </div>
     </div>
     </>
   );
