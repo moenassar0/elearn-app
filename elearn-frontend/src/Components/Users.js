@@ -25,28 +25,42 @@ export function Users() {
 
     return (
         <div>
-            <button onClick={() => {setButtonPopup(true)}}>Popup</button>
-            <AddStudentPopup trigger={buttonPopup} setTrigger={setButtonPopup} setData={getData}>
-                <h3>asdasda asda</h3>
-            </AddStudentPopup>
-            <table>
-                <tbody>
-                <tr>
-                    <th>User Id</th>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                </tr>
-                {data.map((item, i) => (
-                    <tr key={i}>
-                        <td>{item.f_name}</td>
-                        <td>{item.email}</td>
-                    </tr>
-                ))
-            }
-                </tbody>
-
-            </table>
+            <div className='container'>
+                <div className="main-header">
+                    <span className="main-header-title">
+                        Check out the list of users
+                    </span>
+                    <div className="main-buttons">
+                        <div className='add-user-btn'>
+                            <button onClick={() => {setButtonPopup(true)}}>+</button>
+                        </div>
+                        <AddStudentPopup trigger={buttonPopup} setTrigger={setButtonPopup} setData={getData}>
+                        </AddStudentPopup>
+                    </div>
+                    <div className="main-display-table">
+                        <table className="main-table" id="main-table-clients">
+                            <tbody>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Actions</th>
+                                </tr>
+                                {data.map((item, i) => (
+                                    <tr key={i}>
+                                        <td>{item._id}</td>
+                                        <td>{item.f_name + " " + item.l_name}</td>
+                                        <td>{item.email}</td>
+                                        <td><button>Edit</button></td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        
     );
   }
