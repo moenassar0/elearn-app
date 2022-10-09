@@ -21,4 +21,9 @@ class UserController extends Controller
  
         return response()->json(["result" => "ok", 'user added:' => $user], 201);
     }
+
+    public function getStudents(){
+        $users = User::where('user_type', 'Student')->get();
+        return response()->json(['instructors' => $users], 201);
+    }
 }
