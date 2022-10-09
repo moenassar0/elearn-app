@@ -6,7 +6,34 @@ import { Navigate } from 'react-router-dom';
 
 function AddStudentPopup(props){
 
+    const userRef = useRef();
 
+    const [f_name, setFname] = useState('');
+    const [l_name, setLname] = useState('');
+    const [email, setEmail] = useState('');
+    const [pwd, setPwd] = useState('');
+    const [errMsg, setErrMsg] = useState('');
+    
+
+
+
+
+        const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(f_name, l_name, email, pwd);
+        try{
+            const response = await axios.post(
+                'http://127.0.0.1:8000/api/auth/register', 
+                {f_name, l_name, email, 'password': pwd, 'user_type': 'Student'} );
+            console.log(response.status != 200 || response.status != 201);
+            fetchData();
+        }catch{
+            
+        }
+
+        //setUser('');
+        //setPwd('');
+    }
 
     return (props.trigger) ? (
         <div className='popup'>
