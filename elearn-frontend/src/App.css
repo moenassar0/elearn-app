@@ -116,3 +116,14 @@ form{
 .navbar-item:hover{
   background-color: #4E3350;
 }
+
+.img-resize{
+  height: 35px;
+  width: 35px;
+  margin-right: 10px;
+}
+
+.navbar-item-link{
+  text-decoration: none;
+  color: white;
+}
