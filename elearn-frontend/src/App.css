@@ -111,6 +111,8 @@ form{
   cursor: pointer;
   justify-content: center;
   align-items: center;
+  text-decoration: none;
+  color: white;
 }
 
 .navbar-item:hover{
@@ -121,11 +123,6 @@ form{
   height: 35px;
   width: 35px;
   margin-right: 10px;
-}
-
-.navbar-item-link{
-  text-decoration: none;
-  color: white;
 }
 
 .logout-div{
@@ -172,6 +169,11 @@ form{
   margin-bottom: 15px;
 }
 
+.main-buttons{
+  display: flex;
+  justify-content: flex-end;
+}
+
 /* TABLE */
 .container{
   width: 100%;
@@ -181,13 +183,14 @@ form{
 }
 
 .main-display-table{
-  width: 90%;
+  width: 100%;
   min-height: 100vh;
   max-height: 600px;
   font-size: 1rem;
   background-color: white;
   border-radius: 15px;
   overflow-y: scroll;
+  overflow-x: auto;
 }
 
 .main-table{
@@ -204,7 +207,7 @@ form{
   background-color: #FF5B8D;
   text-align: left;
   font-weight: bold;
-  position: sticky;
+  position: relative;
   top:0;
   left:0;
 }
@@ -240,4 +243,44 @@ form{
   position: absolute;
   top: 16px;
   right: 16px;
+}
+
+.add-user-btn{
+  display: flex;
+  width: 20%;
+  align-self: flex-end;
+}
+
+.add-user-btn button{
+  border-radius: 10px;
+  border: none;
+  background-color: white;
+  color: black;
+  width: 70px;
+  font-size: 30px;
+  box-shadow: 0 0px 5px 0px #5752ac7e;
+  cursor: pointer;
+}
+
+.add-user-btn button:hover{
+  background-color: #FF5B8D;
+}
+
+/* Responsitivity */
+
+
+@media only screen and (max-width: 500px){
+  .main-table{
+    font-size: 0.8em;
+  }
+
+  .logout-div button{
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 650px){
+  .overflow-text{
+    display: none;
+  }
 }
