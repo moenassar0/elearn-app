@@ -6,3 +6,27 @@
   box-sizing: border-box;
   font-family:  'Poppins', sans-serif;
 }
+
+/* Login Componenet */
+.login-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  background-color: grey;
+  height: 100%;
+  max-height: 400px;
+}
+
+.login-form-item{
+  display: flex;
+}
+
+.login-label{
+  width: 20%;
+}
+
+.width-adjust{
+  width: 80%;
+}
