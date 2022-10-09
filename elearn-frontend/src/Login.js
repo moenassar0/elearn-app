@@ -61,40 +61,40 @@ export default function Login() {
 
     return (
         <section>
-            <div className="top-title"><h1>Login</h1></div>
+            <div className="top-login-title"><h1>Login</h1></div>
             <div className='login-container'>
-            <div className='login-form'>
-                <form onSubmit={handleSubmit}>
-                    <div class="login-form-item">
-                        <div className="login-label"><label htmlFor='username'> Email: </label></div>
-                        <input className="width-adjust"
-                            type="text"
-                            id="username"
-                            ref={userRef}
-                            autoComplete="off"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user}
-                            required
-                        />
-                    </div>
+                <div className='login-form'>
+                    <form onSubmit={handleSubmit}>
+                        <div class="login-form-item">
+                            <div className="login-label"><label htmlFor='username'> Email: </label></div>
+                            <input className="width-adjust"
+                                type="text"
+                                id="username"
+                                ref={userRef}
+                                autoComplete="off"
+                                onChange={(e) => setUser(e.target.value)}
+                                value={user}
+                                required
+                            />
+                        </div>
+                        <div className='login-form-item'>
+                            <div className="login-label"><label htmlFor='password'>Password: </label></div>
+                            <input className="width-adjust"
+                                type="password"
+                                id="password"
+                                onChange={(e) => setPwd(e.target.value)}
+                                value={pwd}
+                                required
+                            />
+                        </div>
+                        <div class='login-form-item'>
+                            <button class="login-button">Login</button>                      
+                        </div>
+                    </form>
                     <div className='login-form-item'>
-                        <div className="login-label"><label htmlFor='password'>Password: </label></div>
-                        <input className="width-adjust"
-                            type="password"
-                            id="password"
-                            onChange={(e) => setPwd(e.target.value)}
-                            value={pwd}
-                            required
-                        />
+                        <p>{errMsg}</p>
                     </div>
-                    <div class='login-form-item'>
-                        <button>Sign In</button>                      
-                    </div>
-                </form>
-                <div className='login-form-item'>
-                    <p>{errMsg}</p>
                 </div>
-            </div>
             </div>
 
         </section>

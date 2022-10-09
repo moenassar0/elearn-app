@@ -54,14 +54,33 @@ form{
   margin-bottom: 10px;
 }
 
-.login-form-item button{
-  width: 20%;
-}
-
 .login-label{
   width: 20%;
 }
 
 .width-adjust{
   width: 80%;
+}
+
+.input:focus{
+  border: 2px solid #5752ac7e;
+  box-shadow: 0 0 6px #5752ac7e;
+  outline-offset: 0px;
+  outline: none;
+}
+
+.login-button{
+  width: 40%;
+  font-size: 1.2rem;
+  border-radius: 15px;
+  padding: 5px 5px;
+  color: white;
+  border: 2px solid white;
+  background-color: #5B415D;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.login-button:hover{
+  background-color: #4E3350;
 }
