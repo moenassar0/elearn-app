@@ -127,3 +127,29 @@ form{
   text-decoration: none;
   color: white;
 }
+
+.logout-div{
+  width: 20%;
+  height: 100%;
+  display: flex;
+  margin-left: auto;
+  display:flex;
+}
+
+.logout-div button{
+  width: 40%;
+  height: 60%;
+  font-size: 1rem;
+  border-radius: 15px;
+  background-color: #FF5B8D;
+  border-color: transparent;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  align-self: center;
+}
+
+.logout-div button:hover{
+  background-color: #be4368;
+  color:white;
+}
