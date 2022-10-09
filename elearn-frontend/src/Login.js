@@ -33,7 +33,35 @@ export default function Login() {
         return <Navigate to="/instructor" />;
     }
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(user, pwd);
+        try{
+            const response = await axios.post(
+                'http://127.0.0.1:8000/api/auth/login', 
+                {'email': user, 'password': pwd} );
+            console.log(response.data.user['user_type']);
+            if(response.data.user['user_type'] == 'Admin'){
+                setUserType('Admin');
+                const token = response.data.token.original['access_token'];
+                localStorage.setItem("token", token)
+                setNavigate(true);
+            }
 
+            if(response.data.user['user_type'] == 'Instructor'){
+                setUserType('Instructor');
+                const token = response.data.token.original['access_token'];
+                localStorage.setItem("token", token)
+                setNavigate(true);
+            }
+
+        }catch{
+            
+        }
+
+        setUser('');
+        setPwd('');
+    }
 
     return (
         <section>
