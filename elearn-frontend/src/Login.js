@@ -61,29 +61,29 @@ export default function Login() {
 
     return (
         <section>
-            <div className="top-login-title"><h1>Login</h1></div>
             <div className='login-container'>
                 <div className='login-form'>
+                    <div className='login-form-title'>Login Form</div>
                     <form onSubmit={handleSubmit}>
                         <div class="login-form-item">
-                            <div className="login-label"><label htmlFor='username'> Email: </label></div>
                             <input className="width-adjust"
                                 type="text"
                                 id="username"
                                 ref={userRef}
                                 autoComplete="off"
                                 onChange={(e) => setUser(e.target.value)}
+                                placeholder="Email"
                                 value={user}
                                 required
                             />
                         </div>
                         <div className='login-form-item'>
-                            <div className="login-label"><label htmlFor='password'>Password: </label></div>
                             <input className="width-adjust"
                                 type="password"
                                 id="password"
                                 onChange={(e) => setPwd(e.target.value)}
                                 value={pwd}
+                                placeholder="Password"
                                 required
                             />
                         </div>
