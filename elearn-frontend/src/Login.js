@@ -62,6 +62,7 @@ export default function Login() {
     return (
         <section>
             <div className="top-title"><h1>Login</h1></div>
+            <div className='login-container'>
             <div className='login-form'>
                 <form onSubmit={handleSubmit}>
                     <div class="login-form-item">
@@ -94,6 +95,8 @@ export default function Login() {
                     <p>{errMsg}</p>
                 </div>
             </div>
+            </div>
+
         </section>
   )
 
