@@ -15,14 +15,9 @@ export default function Login() {
     const [isAdmin, setAdmin] = useState(false);
     const [user_type, setUserType] = useState('');
     
-
     useEffect(() => {
         userRef.current.focus();
     }, [])
-
-    useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd])
 
     const [navigate, setNavigate] = useState(false);
 
@@ -54,9 +49,10 @@ export default function Login() {
                 localStorage.setItem("token", token)
                 setNavigate(true);
             }
+            setErrMsg('');
 
         }catch{
-            
+            setErrMsg('Wrong credentials!');
         }
 
         setUser('');
@@ -65,29 +61,39 @@ export default function Login() {
 
     return (
         <section>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor='username'> Username: </label>
-                <input 
-                    type="text"
-                    id="username"
-                    ref={userRef}
-                    autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
-                    required
-                />
-                <label htmlFor='password'>Password: </label>
-                <input 
-                    type="password"
-                    id="password"
-                    onChange={(e) => setPwd(e.target.value)}
-                    value={pwd}
-                    required
-                />
-                <button>Sign In</button>
-            </form>
+            <div className="top-title"><h1>Login</h1></div>
+            <div className='login-form'>
+                <form onSubmit={handleSubmit}>
+                    <div class="login-form-item">
+                        <div className="login-label"><label htmlFor='username'> Email: </label></div>
+                        <input className="width-adjust"
+                            type="text"
+                            id="username"
+                            ref={userRef}
+                            autoComplete="off"
+                            onChange={(e) => setUser(e.target.value)}
+                            value={user}
+                            required
+                        />
+                    </div>
+                    <div className='login-form-item'>
+                        <div className="login-label"><label htmlFor='password'>Password: </label></div>
+                        <input className="width-adjust"
+                            type="password"
+                            id="password"
+                            onChange={(e) => setPwd(e.target.value)}
+                            value={pwd}
+                            required
+                        />
+                    </div>
+                    <div class='login-form-item'>
+                        <button>Sign In</button>                      
+                    </div>
+                </form>
+                <div className='login-form-item'>
+                    <p>{errMsg}</p>
+                </div>
+            </div>
         </section>
   )
 
