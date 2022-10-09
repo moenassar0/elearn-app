@@ -7,16 +7,14 @@ export function AdminNavBar() {
   return(
     <>
     <div className='admin-navbar'>
-        <div className='navbar-item'>
-            
-                <div ><img className='img-resize' src='../../images/users_icon.svg'></img></div>
-                <div><Link className='navbar-item-link' to="/admin/users">Users</Link></div>
-            
-        </div>
-        <div className='navbar-item'>
-        <div ><img className='img-resize' src='../../images/courses_icon.svg'></img></div>
-            <div><Link className='navbar-item-link' to="/admin/courses">Courses</Link></div>
-        </div>
+        <Link className='navbar-item' to="/admin/users">
+            <div><img className='img-resize' src='../../images/users_icon.svg'></img></div>
+            <div className="overflow-text">Users</div>
+            </Link>
+        <Link className='navbar-item' to="/admin/courses">
+            <div><img className='img-resize' src='../../images/courses_icon.svg'></img></div>
+            <div className="overflow-text">Courses</div>
+        </Link>
         <div className='logout-div'>
             <button>Logout</button>
         </div>
