@@ -8,6 +8,28 @@
 }
 
 /* Login Componenet */
+.login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  flex-direction: column;
+}
+
+.top-login-title{
+  display: flex;
+  width: 100%;
+  height: 100px;
+  background-color: #5B415D;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bolder;
+  color: white;
+}
+
 .login-form{
   display: flex;
   flex-direction: column;
