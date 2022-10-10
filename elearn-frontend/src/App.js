@@ -28,6 +28,9 @@ function App() {
         <Route path="/instructor" element={ <InstructorDashboard /> }>
           <Route path="/instructor/courses" element={<InstructorSchedule />}></Route>
         </Route>
+        <Route path="/student" element={ <InstructorDashboard /> }>
+          <Route path="/student/courses" element={<InstructorSchedule />}></Route>
+        </Route>
         
       </Routes>
     </>
