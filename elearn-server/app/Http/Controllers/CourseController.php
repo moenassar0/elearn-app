@@ -30,10 +30,23 @@ class CourseController extends Controller
 
         foreach($courses as $course){
             if($course->instructor){
-                $instructor = User::where('_id', $course->instructor)->first();
+                $instructor = User::where('_id', $course->instructor)->where('user_type', 'Instructor')->first();
                 $course->instructor = $instructor;
             }
         }
         return response()->json(['courses' => $courses], 201);
+    }
+
+    public function getStudentsInCourse(Request $request){
+        $course_id = $request->course_id;
+        $students = [];
+        $allStudents = User::where('user_type', 'Student')->get();
+
+        for($i = 0; $i < count($allStudents); $i++){
+            if(in_array($course_id, $allStudents[$i]->courses)){
+                array_push($students, $allStudents[$i]);
+            }
+        }
+        return response()->json(['students' => $students], 201);
     }
 }
