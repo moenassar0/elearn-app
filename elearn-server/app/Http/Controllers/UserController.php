@@ -62,5 +62,8 @@ class UserController extends Controller
         return response()->json([$user]);
     }
 
-
+    public function getUserFromID(Request $request){
+        $user = User::where('_id', $request->instructor_id)->first();
+        return response()->json(['user' => $user]);
+    }
 }
