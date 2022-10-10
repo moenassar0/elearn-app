@@ -13,6 +13,7 @@ class CreateUsersTable extends Migration
             $table->string('f_name');
             $table->string('l_name');
             $table->string('email')->unique();
+            $table->json('courses');
             $table->string('password');
             $table->string('user_type');
             $table->rememberToken();
