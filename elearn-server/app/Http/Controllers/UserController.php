@@ -39,5 +39,28 @@ class UserController extends Controller
         return response()->json([$user->courses]);
     }
 
+    public function assignCourseToInstructor(Request $request){
+        $user = User::where('_id', $request->instructor_id)->first();
+        //print_r($user);
+        if($user->courses){
+            $courses = $user->courses;
+            array_push($courses, $request->course_id);
+            $user->courses = $courses;
+        }
+        else{
+            $courses = [];
+            array_push($courses, $request->course_id);
+            $user->courses = $courses;
+        }
+
+        $user->save();
+        
+        $course = Course::where('_id', $request->course_id)->first();
+        $course->instructor = $request->instructor_id;
+        $course->save();
+
+        return response()->json([$user]);
+    }
+
 
 }
