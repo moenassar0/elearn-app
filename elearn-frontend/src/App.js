@@ -7,6 +7,7 @@ import { useRef, useState, useEffect } from 'react';
 import useToken from './useToken';
 import {Users} from "./Components/Users";
 import {Courses} from "./Components/Courses";
+import { InstructorSchedule } from "./Components/InstructorSchedule"
 
 function App() {
 
@@ -24,7 +25,9 @@ function App() {
           <Route path="/admin/users" element={<Users />}></Route>
           <Route path="/admin/courses" element={<Courses />}></Route>
         </Route>
-        <Route path="/instructor" element={ <InstructorDashboard /> }></Route>
+        <Route path="/instructor" element={ <InstructorDashboard /> }>
+          <Route path="/instructor/courses" element={<InstructorSchedule />}></Route>
+        </Route>
         
       </Routes>
     </>
