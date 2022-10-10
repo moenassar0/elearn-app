@@ -21,8 +21,8 @@ class AuthController extends Controller
             'f_name' => 'required',
             'l_name' => 'required',
             'email' => 'required',
-            'password' => 'required',
-            'user_type' => 'required'
+            'user_type' => 'required',
+            'password' => 'required'
         ]);
 
         if($validator->fails())
@@ -38,7 +38,7 @@ class AuthController extends Controller
 
         $user->save();*/
 
-        $user = User::create(array_merge($validator->validated(), ['password' => bcrypt($request->password)]));
+        $user = User::create(array_merge($validator->validated(), ['courses' => []],['password' => bcrypt($request->password)]));
     
         return response()->json(["result" => "ok", 'user added:' => $user], 201);
     }
