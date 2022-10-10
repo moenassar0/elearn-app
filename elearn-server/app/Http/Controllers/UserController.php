@@ -72,7 +72,7 @@ class UserController extends Controller
     public function getInstructorCourses(){
         $id = auth()->user()->id;
         $user = User::where('_id', $id)->first();
-        
+
         //Using courseID fetch the course data from the course table
         if($user->courses){
             $courses = $user->courses;
@@ -83,5 +83,28 @@ class UserController extends Controller
             return response()->json(['courses' => $courses]);
         }
         return response()->json(['courses' => 'empty']);
+    }
+
+    public function enroll(Request $request){
+        $student_id = $request->student_id;
+        $course_id = $request->course_id;
+
+        $user = User::where('_id', $student_id)->first();
+        if($user->courses){
+            $courses = $user->courses;
+            if(!in_array($course_id, $courses)){
+                array_push($courses, $course_id);
+                $user->courses = $courses;
+            }
+        }
+        else{
+            $courses = [];
+            array_push($courses, $course_id);
+            $user->courses = $courses;
+        }
+
+        $user->save();
+        
+        return response()->json(['user' => $user]);
     }
 }
