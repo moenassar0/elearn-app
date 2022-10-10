@@ -15,4 +15,11 @@ class AnnouncementController extends Controller
 
         return response()->json(["announcement" => $announcement], 201);
     }
+
+    public function getAnnouncements(Request $request){
+        $course_id = $request->course_id;
+        $announcements = Announcement::where('course_id', $course_id)->get();
+
+        return response()->json(["announcement" => $announcements], 201);
+    }
 }
