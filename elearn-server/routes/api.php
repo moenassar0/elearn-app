@@ -18,9 +18,11 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function($router) {
 
     Route::get("/users", [UserController::class, "getStudents"]);
     Route::get("/instructors", [UserController::class, "getInstructors"]);
-
-
+    Route::get("/instructorcourses", [UserController::class, "getInstructorCourses"]);
+    
+    Route::post("/enrolled", [CourseController::class, "getStudentsInCourse"]);
     Route::post("/addcourse", [CourseController::class, "addCourse"]);
+
     Route::post("/me", [AuthController::class, "me"]);
     Route::post("/studentcourses", [UserController::class, "getStudentCourses"]);
     Route::post("/assigncourse", [UserController::class, "assignCourseToInstructor"]);
