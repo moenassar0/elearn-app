@@ -14,7 +14,26 @@ function AddCoursePopup(props){
     const [errMsg, setErrMsg] = useState('');
     
 
+    const fetchData = async () => {
+        const response = await axios.get('http://127.0.0.1:8000/api/courses');  
+        props.setData(response.data.courses);
+    }
 
+
+        const handleSubmit = async (e) => {
+        e.preventDefault();
+        console.log(course_name, course_code, course_description);
+        try{
+            const response = await axios.post(
+                'http://127.0.0.1:8000/api/auth/addcourse', 
+                {course_name, course_code, course_description},
+                {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
+            console.log(response.status != 200 || response.status != 201);
+            fetchData();
+        }catch{
+            
+        }
+    }
 
     return (props.trigger) ? (
         <div className='popup'>
