@@ -6,15 +6,15 @@ import { Navigate } from 'react-router-dom';
 
 function EnrollStudentPopup(props){
 
-    const [instructors, setInstructors] = useState([]);
-   const [selectedInstructor, setInstructor] = useState(0);
+    const [students, setStudents] = useState([]);
+   const [selectedStudent, setStudent] = useState(0);
     const assignInstructor = async (e) => {
         e.preventDefault();
-        console.log(props.course_id, selectedInstructor);
+        console.log(props.course_id, selectedStudent);
         try{
             const response = await axios.post(
-                'http://127.0.0.1:8000/api/auth/assigncourse', 
-                {instructor_id: selectedInstructor, course_id: props.course_id},
+                'http://127.0.0.1:8000/api/auth/enroll', 
+                {student_id: selectedStudent, course_id: props.course_id},
                 {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
             console.log(response.status != 200 || response.status != 201);
             //fetchCourses();
@@ -30,16 +30,16 @@ function EnrollStudentPopup(props){
     //Get list of students
     const fetchData = async () => {
         const response = await axios.get('http://127.0.0.1:8000/api/auth/users');
-        setInstructors(response.data.instructors);
+        setStudents(response.data.instructors);
     }
      
     return (props.trigger) ? (
         <div className='popup'>
             <div className='popup-inner'>
-                <select id="select-instructor" onChange={(e) => setInstructor(e.target.value)}>
+                <select id="select-student" onChange={(e) => setStudent(e.target.value)}>
                     <option value="0">Select instructor:</option>
-                    {instructors.map((instructor, i) => (
-                        <option key={i} value={instructor._id}>{instructor.f_name + " " + instructor.l_name}</option>
+                    {students.map((student, i) => (
+                        <option key={i} value={student._id}>{student.f_name + " " + student.l_name}</option>
                                 ))}
                 </select>
                 <button onClick={() => { props.setTrigger(false)} }className='close-btn'>Close</button>
