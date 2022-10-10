@@ -13,4 +13,13 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class Course extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'f_name',
+        'l_name',
+        'email',
+        'user_type',
+        'password',
+        'courses',
+    ];
 }
