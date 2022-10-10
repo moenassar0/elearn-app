@@ -163,6 +163,8 @@ form{
 }
 
 .main-header-title{
+  display: flex;
+  justify-content: space-between;
   color: black;
   font-weight: bolder;
   font-size: 2rem;
@@ -228,7 +230,7 @@ form{
   display: flex;
   justify-content: center;
   align-items: center;
-
+  z-index: 5;
 }
 
 .popup-inner{
@@ -273,14 +275,14 @@ form{
   .main-table{
     font-size: 0.8em;
   }
-
-  .logout-div button{
-    width: 100%;
-  }
 }
 
 @media only screen and (max-width: 650px){
   .overflow-text{
     display: none;
+  }
+
+  .logout-div button{
+    width: 100%;
   }
 }
