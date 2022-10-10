@@ -36,12 +36,11 @@ export function InstructorSchedule() {
 
     return (
         <div className='container'>
-            <EnrollStudentPopup course_id={currCourseID} trigger={enrollStudentButton} setTrigger={setEnrollStudentButton} setData={getData}>
+            {enrollStudentButton && <EnrollStudentPopup course_id={currCourseID} trigger={enrollStudentButton} setTrigger={setEnrollStudentButton} setData={getData}>
 
-            </EnrollStudentPopup>
-            <ShowEnrolledStudentsPopup course_id={currCourseID} trigger={showStudentsButton} setTrigger={setShowStudentsButton}>
-
-            </ShowEnrolledStudentsPopup>
+            </EnrollStudentPopup>}
+            {showStudentsButton && <ShowEnrolledStudentsPopup course_id={currCourseID} trigger={showStudentsButton} setTrigger={setShowStudentsButton}></ShowEnrolledStudentsPopup>}
+            
             <div className="main-header">
                 <div className="main-header-title">
                     <span>Check out your schedule</span>
