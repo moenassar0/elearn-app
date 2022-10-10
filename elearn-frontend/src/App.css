@@ -231,14 +231,17 @@ form{
   justify-content: center;
   align-items: center;
   z-index: 5;
+  
 }
 
 .popup-inner{
   position: relative;
   padding: 32px;
-  width:100%;
+  width: 100%;
+  max-height:400px;
   max-width: 640px;
   background-color: #FFF;
+  overflow-y: scroll;
 }
 
 .popup-inner .close-btn{
