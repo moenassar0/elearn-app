@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Course;
 
 class UserController extends Controller
 {
@@ -26,4 +27,11 @@ class UserController extends Controller
         $users = User::where('user_type', 'Student')->get();
         return response()->json(['instructors' => $users], 201);
     }
+
+    public function getInstructors(){
+        $users = User::where('user_type', 'Instructor')->get();
+        return response()->json(['instructors' => $users], 201);
+    }
+
+
 }
