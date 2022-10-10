@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRef, useState, useEffect } from 'react';
-import { AdminNavBar } from './AdminNavBar';
+import { StudentNavBar } from './StudentNavBar';
 import axios, { Axios } from '../api/axios';
 import { BrowserRouter as Router, Link, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 
@@ -33,7 +33,7 @@ export function StudentDashboard() {
 
   return(
     <>
-        <AdminNavBar />
+        <StudentNavBar />
         <Outlet />
     </>
   );
