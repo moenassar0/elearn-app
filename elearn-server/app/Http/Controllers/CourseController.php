@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\User;
 
 class CourseController extends Controller
 {
@@ -15,6 +16,7 @@ class CourseController extends Controller
         $course = new Course;
  
         $course->course_name = $request->course_name;
+        $course->instructor = '';
         $course->course_description = $request->course_description;
         $course->course_code = $request->course_code;
 
@@ -25,6 +27,13 @@ class CourseController extends Controller
 
     public function getCurses(){
         $courses = Course::select('*')->get();
+
+        foreach($courses as $course){
+            if($course->instructor){
+                $instructor = User::where('_id', $course->instructor)->first();
+                $course->instructor = $instructor;
+            }
+        }
         return response()->json(['courses' => $courses], 201);
     }
 }
