@@ -22,20 +22,17 @@ export function Users() {
     //Usestate for button popup
     const [buttonPopup, setButtonPopup] = useState(false);
 
-
     return (
         <div>
+            <AddStudentPopup trigger={buttonPopup} setTrigger={setButtonPopup} setData={getData}>
+            </AddStudentPopup>
             <div className='container'>
                 <div className="main-header">
-                    <span className="main-header-title">
-                        Check out the list of users
-                    </span>
-                    <div className="main-buttons">
+                    <div className="main-header-title">
+                        <span>Check out the list of users</span>
                         <div className='add-user-btn'>
                             <button onClick={() => {setButtonPopup(true)}}>+</button>
                         </div>
-                        <AddStudentPopup trigger={buttonPopup} setTrigger={setButtonPopup} setData={getData}>
-                        </AddStudentPopup>
                     </div>
                     <div className="main-display-table">
                         <table className="main-table" id="main-table-clients">
