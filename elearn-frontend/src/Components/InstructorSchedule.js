@@ -3,14 +3,12 @@ import React from 'react'
 import axios, { Axios } from '../api/axios';
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
-import AddCoursePopup from './AddCoursePopup';
-import AssignCoursePopup from './AssignCoursePopup';
+import EnrollStudentPopup from './EnrollStudentPopup';
 
 export function InstructorSchedule() {
 
     const [data, getData] = useState([])
-    const [addCourseButton, setAddCourseButton] = useState(false);
-    const [assignCourseButton, setAssignCourseButton] = useState(false);
+    const [enrollStudentButton, setEnrollStudentButton] = useState(false);
     const [currCourseID, setCurrCourseID] = useState(0);
 
     useEffect(() => {
@@ -24,18 +22,19 @@ export function InstructorSchedule() {
         getData(response.data.courses);
     }
 
+    const startEnrollStudentPopup = (id) => {
+        setEnrollStudentButton(true)
+        setCurrCourseID(id);
+    }
+
     return (
         <div className='container'>
-            <AddCoursePopup trigger={addCourseButton} setTrigger={setAddCourseButton} setData={getData}>
-            </AddCoursePopup>
-            <AssignCoursePopup course_id={currCourseID} trigger={assignCourseButton} setTrigger={setAssignCourseButton} setData={getData}>
-            </AssignCoursePopup>
+            <EnrollStudentPopup course_id={currCourseID} trigger={enrollStudentButton} setTrigger={setEnrollStudentButton} setData={getData}>
+
+            </EnrollStudentPopup>
             <div className="main-header">
                 <div className="main-header-title">
                     <span>Check out your schedule</span>
-                    <div className='add-user-btn'>
-                        <button onClick={() => {setAddCourseButton(true)}}>+</button>
-                    </div>
                 </div>
                 <div className="main-display-table">
                     <table className="main-table" id="main-table-clients">
@@ -44,7 +43,6 @@ export function InstructorSchedule() {
                                 <th>Course Code</th>
                                 <th>Course Name</th>
                                 <th>Description</th>
-                                <th>Taught By</th>
                                 <th>Actions</th>
                             </tr>
                             {data.map((item, i) => (
@@ -52,8 +50,7 @@ export function InstructorSchedule() {
                                     <td>{item.course_code}</td>
                                     <td>{item.course_name}</td>
                                     <td>{item.course_description}</td>
-                                    <td>{(item.instructor) ? item.instructor.f_name : 'None'}</td>
-                                    <td><button>Add Announcement</button></td>
+                                    <td><button>Add Announcement</button><button onClick={() => {startEnrollStudentPopup(item._id)}}>Enroll</button><button>Add Assignment</button></td>
                                 </tr>
                             ))}
                         </tbody>
