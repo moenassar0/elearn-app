@@ -9,7 +9,10 @@ function EditCoursePopup(props){
     const [course_description, setDescription] = useState('');
 
     const handleSubmit = async (e) => {
-
+        e.preventDefault();
+        await axios.post('auth/course/update', {course_id: props.course_id, course_code, course_name, course_description});
+        const response = await axios.get('/courses');
+        props.setData(response.data.courses);
     }
 
     return (props.trigger) ? (
@@ -21,11 +24,10 @@ function EditCoursePopup(props){
                 <input 
                     className='login-input'
                     type="text"
-                    ref={userRef}
                     autoComplete="off"
                     onChange={(e) => setCode(e.target.value)}
                     value={course_code}
-                    placeholder="First Name"
+                    placeholder="Course Code"
                     required
                 />
                 <input 
@@ -34,16 +36,16 @@ function EditCoursePopup(props){
                     autoComplete="off"
                     onChange={(e) => setName(e.target.value)}
                     value={course_name}
-                    placeholder="Last Name"
+                    placeholder="Course Name"
                     required
                 />
-                                <input 
+                <input 
                     className='login-input'
                     type="text"
                     autoComplete="off"
                     onChange={(e) => setDescription(e.target.value)}
                     value={course_description}
-                    placeholder="Last Name"
+                    placeholder="Description"
                     required
                 />
                 <button className='btn-purple' onClick={ handleSubmit }>Update</button>
