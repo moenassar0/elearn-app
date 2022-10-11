@@ -25,7 +25,7 @@ class CourseController extends Controller
         return response()->json(["result" => "ok", 'course added:' => $course], 201);
     }
 
-    public function getCurses(){
+    public function getCourses(){
         $courses = Course::select('*')->get();
 
         foreach($courses as $course){

@@ -8,15 +8,10 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AssignmentController;
 
-Route::post("/add", [UserController::class, "store"]);
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get("/courses", [CourseController::class, "getCurses"]);
+//Outside JWT token validation middleware
 Route::post("/auth/register", [AuthController::class, "register"]);
 Route::post("/auth/login", [AuthController::class, "login"]);
+
 Route::group(['middleware' => ['jwt.verify'], 'prefix' => 'auth'], function($router) {
 
     //UserController
@@ -31,6 +26,7 @@ Route::group(['middleware' => ['jwt.verify'], 'prefix' => 'auth'], function($rou
     Route::post("/user/update", [UserController::class, "updateUser"]);
 
     //CourseController
+    Route::get("/courses", [CourseController::class, "getCourses"]);
     Route::post("/enrolled", [CourseController::class, "getStudentsInCourse"]);
     Route::post("/addcourse", [CourseController::class, "addCourse"]);
     Route::post("/course/update", [CourseController::class, "updateCourse"]);
@@ -44,10 +40,6 @@ Route::group(['middleware' => ['jwt.verify'], 'prefix' => 'auth'], function($rou
     Route::post("/assignments", [AssignmentController::class, "getAssignments"]);
 
     Route::post("/me", [AuthController::class, "me"]);
-});
-
-Route::group(['middleware' => ['jwt.verify']], function() {
-    Route::post("/test", [UserController::class, "test"]);
 });
 
 
