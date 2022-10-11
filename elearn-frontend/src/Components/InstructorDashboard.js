@@ -3,8 +3,6 @@ import { useRef, useState, useEffect } from 'react';
 import { InstructorNavBar } from './InstructorNavBar';
 import axios, { Axios } from '../api/axios';
 import { BrowserRouter as Router, Link, Routes, Route, Outlet, Navigate } from 'react-router-dom';
-import { Users } from './Users';
-  
 
 export function InstructorDashboard() {
     const [user_type, setUserType] = useState('Instructor')

@@ -1,11 +1,8 @@
 import React from 'react';
 import { useRef, useState, useEffect } from 'react';
 import { AdminNavBar } from './AdminNavBar';
-import axios, { Axios } from '../api/axios';
+import axios from '../api/axios';
 import { BrowserRouter as Router, Link, Routes, Route, Outlet, Navigate } from 'react-router-dom';
-import { Users } from './Users';
-
-
 
 export function AdminDashboard() {
 
