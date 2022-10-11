@@ -1,29 +1,26 @@
 import { useRef, useState, useEffect } from 'react';
 import React from 'react'
-import axios, { Axios } from '../api/axios';
-import PropTypes from 'prop-types';
+import axios from '../api/axios';
 
 
 function ShowEnrolledStudentsPopup(props){
     
     const [studentsData, setStudentsData] = useState([]);
-    const [call, setCall] = useState(false);
+    const [call, setCall] = useState(true);
     useEffect(() => {
         fetchStudentData()
     }, [])
 
     //Get instructor's assigned courses
     const fetchStudentData = async () => {
-        try{
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/enrolled',
-            {course_id: props.course_id}, 
-            {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
-            console.log(response);
-            console.log(props.course_id);
-            setStudentsData(response.data.students);
+        setCall(false);
+        const response = await axios.post('/auth/enrolled', {course_id: props.course_id});
+        if(response.status == 400){
             setCall(true);
-        }catch{
+            return;
         }
+        setStudentsData(response.data.students);
+        setCall(true);
     }
 
     return (props.trigger) ? (
