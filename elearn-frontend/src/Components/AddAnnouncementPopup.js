@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import React from 'react'
-import axios, { Axios } from '../api/axios';
+import axios from '../api/axios';
 
 function AddAnnouncementPopup(props){
 
@@ -10,12 +10,7 @@ function AddAnnouncementPopup(props){
     const handleSubmit = async (e) => {
         e.preventDefault();
         setAdding(false);
-        const response = await axios.post(
-            'http://127.0.0.1:8000/api/auth/announcement', 
-            {course_id: props.course_id, announcement_description: announcement},
-            {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
-        console.log(response.status != 200 || response.status != 201);
-        console.log(response);
+        await axios.post('/auth/announcement', {course_id: props.course_id, announcement_description: announcement});
         setAdding(true);
     }
 

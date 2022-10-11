@@ -12,12 +12,7 @@ function AddAssignment(props){
     const handleSubmit = async (e) => {
         e.preventDefault();
         setAdding(false);
-        const response = await axios.post(
-            'http://127.0.0.1:8000/api/auth/assignment', 
-            {course_id: props.course_id, assignment_description: assignment, date},
-            {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
-        console.log(response.status != 200 || response.status != 201);
-        console.log(response);
+        await axios.post('/auth/assignment', {course_id: props.course_id, assignment_description: assignment, date});
         setAdding(true);
     }
 
