@@ -27,6 +27,9 @@ export default function Login() {
     else if(navigate && user_type == 'Instructor'){
         return <Navigate to="/instructor" />;
     }
+    else if(navigate && user_type == 'Student'){
+        return <Navigate to="/student" />;
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -45,6 +48,13 @@ export default function Login() {
 
             if(response.data.user['user_type'] == 'Instructor'){
                 setUserType('Instructor');
+                const token = response.data.token.original['access_token'];
+                localStorage.setItem("token", token)
+                setNavigate(true);
+            }
+
+            if(response.data.user['user_type'] == 'Student'){
+                setUserType('Student');
                 const token = response.data.token.original['access_token'];
                 localStorage.setItem("token", token)
                 setNavigate(true);
