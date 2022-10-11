@@ -22,6 +22,6 @@ class JWTest extends BaseMiddleware
         if(isset(auth()->user()->id))
             return $next($request);
         else
-            return response()->json(['status' => 'Authorization Token Error']);
+            return response()->json(['status' => 'Authorization Token Error'], 400);
     }
 }

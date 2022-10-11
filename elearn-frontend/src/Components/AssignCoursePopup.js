@@ -5,47 +5,39 @@ import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 
 function AssignCoursePopup(props){
-
     const [instructors, setInstructors] = useState([]);
-   const [selectedInstructor, setInstructor] = useState(0);
+    const [selectedInstructor, setInstructor] = useState(0);
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
+    
     const assignInstructor = async (e) => {
         e.preventDefault();
         console.log(props.course_id, selectedInstructor);
         try{
             const response = await axios.post(
                 'http://127.0.0.1:8000/api/auth/assigncourse', 
-                {instructor_id: selectedInstructor, course_id: props.course_id},
-                {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
-            console.log(response.status != 200 || response.status != 201);
+                {instructor_id: selectedInstructor, course_id: props.course_id}, headers);
             fetchCourses();
         }
         catch{
         }
     } 
 
-    /*const [data, getData] = useState([])
-    const [addCourseButton, setAddCourseButton] = useState(false);
-    */
     useEffect(() => {
         fetchData()
     }, [])
     
     //Get list of instructors
     const fetchData = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/auth/instructors');
+        const response = await axios.get('http://127.0.0.1:8000/api/auth/instructors', headers);
         console.log(response.data.instructors)
         setInstructors(response.data.instructors);
     }
 
     const fetchCourses = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/courses');
+        const response = await axios.get('http://127.0.0.1:8000/api/courses', headers);
         props.setData(response.data.courses);
     }      
 
-//<select id="select-voucher" class="">
-//<option value="0">Select instructor:</option>
-//</select>
-//<option value="${voucher.code}">${voucher.code} : ${voucher.amount}$</option>
     return (props.trigger) ? (
         <div className='popup'>
             <div className='popup-inner'>

@@ -7,6 +7,7 @@ export const StudentAssignments = () => {
     const [showAssignments, setShowAssignments] = useState(false);
     const [assignments, setAssignments] = useState([]);
     const [loadingForAssignments, setLoadingForAssignments] = useState(true);
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
 
     useEffect(() => {
         fetchSchedule()
@@ -14,14 +15,14 @@ export const StudentAssignments = () => {
 
     //Get student's enrolled courses
     const fetchSchedule = async () => {
-        const response = await axios.post('/auth/studentcourses', {});
+        const response = await axios.post('/auth/studentcourses', {}, headers);
         setCourses(response.data.courses);
     }
 
     //Get assignments for specific course
     const fetchAssignments = async (course_id) => {
         setLoadingForAssignments(false);
-        const response = await axios.post('/auth/assignments', {course_id});
+        const response = await axios.post('/auth/assignments', {course_id}, headers);
         setAssignments(response.data.assignment);
         setShowAssignments(true);
         setLoadingForAssignments(true);

@@ -8,6 +8,7 @@ export function StudentSchedule() {
     const [courses, setCourses] = useState([])
     const [currCourseID, setCurrCourseID] = useState('');
     const [viewAnnouncementButton, setViewAnnouncemenButton] = useState(false);
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
 
     useEffect(() => {
         fetchSchedule()
@@ -15,7 +16,7 @@ export function StudentSchedule() {
 
     //Get instructor's assigned courses
     const fetchSchedule = async () => {
-        const response = await axios.post('/auth/studentcourses', {});
+        const response = await axios.post('/auth/studentcourses', {}, headers);
         setCourses(response.data.courses);
     }
 

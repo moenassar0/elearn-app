@@ -7,11 +7,12 @@ function EditCoursePopup(props){
     const [course_code, setCode] = useState('');
     const [course_name, setName] = useState('');
     const [course_description, setDescription] = useState('');
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await axios.post('auth/course/update', {course_id: props.course_id, course_code, course_name, course_description});
-        const response = await axios.get('/courses');
+        await axios.post('auth/course/update', {course_id: props.course_id, course_code, course_name, course_description}, headers);
+        const response = await axios.get('/courses', headers);
         props.setData(response.data.courses);
     }
 

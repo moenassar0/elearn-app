@@ -12,13 +12,14 @@ export function Courses() {
     const [editCourseButton, setEditCourseButton] = useState(false);
     const [assignCourseButton, setAssignCourseButton] = useState(false);
     const [currCourseID, setCurrCourseID] = useState(0);
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
 
     useEffect(() => {
         fetchData()
     }, [])
 
     const fetchData = async () => {
-        const response = await axios.get('/courses');
+        const response = await axios.get('/courses', headers);
         getData(response.data.courses);
     }
 

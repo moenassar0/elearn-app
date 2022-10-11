@@ -7,10 +7,12 @@ function AddAnnouncementPopup(props){
     const [announcement, setAnnouncement] = useState('');
     const [adding, setAdding] = useState(true);
     const userRef = useRef();
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setAdding(false);
-        await axios.post('/auth/announcement', {course_id: props.course_id, announcement_description: announcement});
+        await axios.post('/auth/announcement', {course_id: props.course_id, announcement_description: announcement}, headers);
         setAdding(true);
     }
 

@@ -7,11 +7,12 @@ function EnrollStudentPopup(props){
     const [students, setStudents] = useState([]);
     const [selectedStudent, setStudent] = useState(0);
     const [adding, setAdding] = useState(true);
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
 
     const enrollStudent = async (e) => {
         e.preventDefault();
         setAdding(false);
-        await axios.post('/auth/enroll', {student_id: selectedStudent, course_id: props.course_id});
+        await axios.post('/auth/enroll', {student_id: selectedStudent, course_id: props.course_id}, headers);
         setAdding(true);
     }
 

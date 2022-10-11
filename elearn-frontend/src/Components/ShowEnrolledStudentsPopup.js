@@ -4,9 +4,10 @@ import axios from '../api/axios';
 
 
 function ShowEnrolledStudentsPopup(props){
-    
     const [studentsData, setStudentsData] = useState([]);
     const [call, setCall] = useState(true);
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
+
     useEffect(() => {
         fetchStudentData()
     }, [])
@@ -14,7 +15,7 @@ function ShowEnrolledStudentsPopup(props){
     //Get instructor's assigned courses
     const fetchStudentData = async () => {
         setCall(false);
-        const response = await axios.post('/auth/enrolled', {course_id: props.course_id});
+        const response = await axios.post('/auth/enrolled', {course_id: props.course_id}, headers);
         if(response.status == 400){
             setCall(true);
             return;

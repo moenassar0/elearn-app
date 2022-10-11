@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Link, Routes, Route, Outlet, Navigate } from '
 export function StudentDashboard() {
 
     const [user_type, setUserType] = useState('Student')
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
+
     useEffect(() => {
         fetchUser()
     }, [])
@@ -20,7 +22,7 @@ export function StudentDashboard() {
     const fetchUser = async () => {
         try{
             const response = await axios.post('http://127.0.0.1:8000/api/auth/me', 
-            {}, { headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
+            {}, headers);
             setUserType(response.data['user_type']);
         }catch{
             setUserType('');

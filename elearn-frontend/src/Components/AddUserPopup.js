@@ -10,7 +10,8 @@ function AddStudentPopup(props){
     const [l_name, setLname] = useState('');
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
-    
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
+
     const fetchData = async () => {
         if(props.adding == 'Student'){
             const response = await axios.get('/auth/students');
@@ -26,10 +27,8 @@ function AddStudentPopup(props){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(f_name, l_name, email, pwd);
         const user_type = props.adding;
-        const response = await axios.post('/auth/register', {f_name, l_name, email, 'password': pwd, user_type} );
-        console.log(response.status != 200 || response.status != 201);
+        const response = await axios.post('/auth/register', {f_name, l_name, email, 'password': pwd, user_type}, headers);
         fetchData();
     }
 

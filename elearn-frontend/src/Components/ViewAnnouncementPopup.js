@@ -7,15 +7,16 @@ function ViewAnnouncementPopup(props){
     
     const [announcements, setAnnouncements] = useState([]);
     const [call, setCall] = useState(true);
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
+
     useEffect(() => {
         fetchAnnouncements()
     }, [])
 
     //Get instructor's assigned courses
     const fetchAnnouncements = async () => {
-        console.log("gg");
         setCall(false);
-        const response = await axios.post('/auth/announcements', {course_id: props.course_id});
+        const response = await axios.post('/auth/announcements', {course_id: props.course_id}, headers);
         if(response.status == 400){
             setCall(true);
             return;

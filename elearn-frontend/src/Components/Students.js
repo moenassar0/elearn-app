@@ -12,13 +12,14 @@ export function Students() {
     const [studentToUpdate, setStudentToUpdate] = useState('');
     const [editStudentButton, setEditStudentButton] = useState(false);
     const [loading, setLoading] = useState(true);
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
 
     useEffect(() => {
         fetchData()
     }, [])
 
     const fetchData = async () => {
-        const response = await axios.get('/auth/students');
+        const response = await axios.get('/auth/students', headers);
         console.log(response.data.students)
         getData(response.data.students);
     }

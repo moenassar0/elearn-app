@@ -9,13 +9,14 @@ export function Instructors() {
     const [data, getData] = useState([])
     const [instructorToUpdate, setInstructorToUpdate] = useState('');
     const [editInstructorButton, setEditInstructorButton] = useState(false);
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
  
     useEffect(() => {
         fetchData()
     }, [])
 
     const fetchData = async () => {
-        const response = await axios.get('/auth/instructors');
+        const response = await axios.get('/auth/instructors', headers);
         console.log(response.data.instructors)
         getData(response.data.instructors);
     }

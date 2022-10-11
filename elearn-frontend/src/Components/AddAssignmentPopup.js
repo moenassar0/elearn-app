@@ -6,13 +6,13 @@ function AddAssignment(props){
 
     const [assignment, setAssingment] = useState('');
     const [date, setDate] = useState('');
-
     const [adding, setAdding] = useState(true);
-    const userRef = useRef();
+    const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setAdding(false);
-        await axios.post('/auth/assignment', {course_id: props.course_id, assignment_description: assignment, date});
+        await axios.post('/auth/assignment', {course_id: props.course_id, assignment_description: assignment, date}, headers);
         setAdding(true);
     }
 
