@@ -5,7 +5,7 @@ import axios from '../api/axios';
 function AddStudentPopup(props){
 
     const userRef = useRef();
-
+    const [call, setCall] = useState(true);
     const [f_name, setFname] = useState('');
     const [l_name, setLname] = useState('');
     const [email, setEmail] = useState('');
@@ -13,16 +13,18 @@ function AddStudentPopup(props){
     const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
 
     const fetchData = async () => {
+        setCall(false);
         if(props.adding == 'Student'){
-            const response = await axios.get('/auth/students');
+            const response = await axios.get('/auth/students', headers);
             console.log(response.data.students)
             props.setData(response.data.students);
         }
         else if(props.adding == 'Instructor'){
-            const response = await axios.get('/auth/instructors');
+            const response = await axios.get('/auth/instructors', headers);
             console.log(response.data.instructors)
             props.setData(response.data.instructors);
         }
+        setCall(true);
     }
 
     const handleSubmit = async (e) => {
@@ -35,11 +37,11 @@ function AddStudentPopup(props){
     return (props.trigger) ? (
         <div className='popup'>
             <div className='popup-inner'>
-                <button onClick={() => { props.setTrigger(false)} }className='close-btn'>Close</button>
+            <div className='popup-inner-top'><button onClick={() => { props.setTrigger(false)} } className='btn-purple'>Close</button></div>
+            {!call && <img className='img-resize' src="../../images/loading-load.gif"></img>}
                 <input 
                     type="text"
-                    id="username"
-                    ref={userRef}
+                    className='login-input'
                     autoComplete="off"
                     onChange={(e) => setFname(e.target.value)}
                     value={f_name}
@@ -48,8 +50,7 @@ function AddStudentPopup(props){
                 />
                 <input 
                     type="text"
-                    id="username"
-                    ref={userRef}
+                    className='login-input'
                     autoComplete="off"
                     onChange={(e) => setLname(e.target.value)}
                     value={l_name}
@@ -58,8 +59,7 @@ function AddStudentPopup(props){
                 />
                 <input 
                     type="text"
-                    id="username"
-                    ref={userRef}
+                    className='login-input'
                     autoComplete="off"
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
@@ -68,14 +68,14 @@ function AddStudentPopup(props){
                 />
                 <input 
                     type="password"
-                    id="password"
+                    className='login-input'
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
                     placeholder="password"
                     required
                 />
                 
-                <button onClick={ handleSubmit }>Add</button>
+                <button className='btn-purple' onClick={ handleSubmit }>Add</button>
             </div>
         </div>
     ) : '';

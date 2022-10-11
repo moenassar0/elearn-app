@@ -2,11 +2,13 @@ import React from 'react';
 import { useRef, useState, useEffect } from 'react';
 import { InstructorNavBar } from './InstructorNavBar';
 import axios from '../api/axios';
-import { BrowserRouter as Router, Link, Routes, Route, Outlet, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Routes, Route, Outlet, Navigate, useNavigate } from 'react-router-dom';
 
 export function InstructorDashboard() {
+
     const [user_type, setUserType] = useState('Instructor')
     const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchUser()
@@ -15,7 +17,7 @@ export function InstructorDashboard() {
 
     function checkToken(){
         if(localStorage.getItem("token") == undefined || localStorage.getItem("token") == ''){
-            return <Navigate to="/" />;
+            navigate("/")
         }
     }
 
