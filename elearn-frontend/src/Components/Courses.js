@@ -19,7 +19,7 @@ export function Courses() {
     }, [])
 
     const fetchData = async () => {
-        const response = await axios.get('/courses', headers);
+        const response = await axios.get('/auth/courses', headers);
         getData(response.data.courses);
     }
 

@@ -5,8 +5,6 @@ import EnrollStudentPopup from './EnrollStudentPopup';
 import ShowEnrolledStudentsPopup from './ShowEnrolledStudentsPopup';
 import AddAnnouncementPopup from './AddAnnouncementPopup';
 import AddAssignment from './AddAssignmentPopup';
-import { ValidateUser } from './ValidateUser';
-import { Navigate } from 'react-router-dom';
 
 export function InstructorSchedule() {
 
@@ -16,9 +14,8 @@ export function InstructorSchedule() {
     const [addAnnouncementButton, setAddAnnouncementButton] = useState(false);
     const [addAssignmentButton, setAddAssignmentButton] = useState(false);
     const [currCourseID, setCurrCourseID] = useState(0);
-    const [logoutUser, setLogoutUser] = useState(false);
     const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
-    
+
     useEffect(() => {
         fetchData();
     }, [])
