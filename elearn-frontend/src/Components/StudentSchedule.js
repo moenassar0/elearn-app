@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 import React from 'react'
-import axios, { Axios } from '../api/axios';
+import axios from '../api/axios';
 
 export function StudentSchedule() {
 
-    const [data, setData] = useState([])
+    const [courses, setCourses] = useState([])
 
     useEffect(() => {
         fetchSchedule()
@@ -12,10 +12,8 @@ export function StudentSchedule() {
 
     //Get instructor's assigned courses
     const fetchSchedule = async () => {
-        const response = await axios.post('http://127.0.0.1:8000/api/auth/studentcourses',
-        {}, 
-        {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
-        setData(response.data.courses);
+        const response = await axios.post('/auth/studentcourses', {});
+        setCourses(response.data.courses);
     }
     return (
         <div className='container'>
@@ -32,13 +30,13 @@ export function StudentSchedule() {
                                 <th>Description</th>
                                 <th>Actions</th>
                             </tr>
-                            {data.map((item, i) => (
-                                <tr key={item._id}>
-                                    <td>{item.course_code}</td>
-                                    <td>{item.course_name}</td>
-                                    <td>{item.course_description}</td>
+                            {courses.map((course) => (
+                                <tr key={course._id}>
+                                    <td>{course.course_code}</td>
+                                    <td>{course.course_name}</td>
+                                    <td>{course.course_description}</td>
                                     <td>
-                                        <button>GG</button>
+                                        <button>View Annoucements</button>
                                     </td>
                                 </tr>
                             ))}
