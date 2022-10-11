@@ -33,9 +33,10 @@ function EditUserPopup(props){
         <div className='popup'>
             <div className='popup-inner'>
                 <div className='popup-inner-top'>
-                    <button onClick={() => { props.setTrigger(false)} }className='close-btn'>Close</button>
+                    <button onClick={() => { props.setTrigger(false)} } className='btn-purple'>Close</button>
                 </div>
                 <input 
+                    className='login-input'
                     type="text"
                     ref={userRef}
                     autoComplete="off"
@@ -45,6 +46,7 @@ function EditUserPopup(props){
                     required
                 />
                 <input 
+                    className='login-input'
                     type="text"
                     ref={userRef}
                     autoComplete="off"
@@ -53,7 +55,7 @@ function EditUserPopup(props){
                     placeholder="Last Name"
                     required
                 />
-                <button onClick={ handleSubmit }>Update</button>
+                <button className='btn-purple' onClick={ handleSubmit }>Update</button>
             </div>
         </div>
     ) : '';
