@@ -39,6 +39,7 @@ Route::group(['middleware' => ['jwt.verify'], 'prefix' => 'auth'], function($rou
     Route::post("/assignment", [AssignmentController::class, "addAssignment"]);
     Route::post("/assignments", [AssignmentController::class, "getAssignments"]);
     Route::post("/submit", [AssignmentController::class, "submitAssignment"]);
+    Route::post("/check", [AssignmentController::class, "findStudentSubmission"]);
     
 
     Route::post("/me", [AuthController::class, "me"]);

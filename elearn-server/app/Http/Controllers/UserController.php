@@ -48,22 +48,7 @@ class UserController extends Controller
 
     public function assignCourseToInstructor(Request $request){
         $user = User::where('_id', $request->instructor_id)->first();
-        //print_r($user);
-        /*if($user->courses){
-            $courses = $user->courses;
-            if(!in_array($request->course_id, $courses)){
-                array_push($courses, $request->course_id);
-                $user->courses = $courses;
-            }
-        }
-        else{
-            $courses = [];
-            array_push($courses, $request->course_id);
-            $user->courses = $courses;
-        }
 
-        $user->save();*/
-        
         $course = Course::where('_id', $request->course_id)->first();
         $course->instructor = $request->instructor_id;
         $course->save();
@@ -78,18 +63,6 @@ class UserController extends Controller
 
     public function getInstructorCourses(){
         $id = auth()->user()->id;
-        /*$user = User::where('_id', $id)->first();
-
-        //Using courseID fetch the course data from the course table
-        if($user->courses){
-            $courses = $user->courses;
-            for($i = 0; $i < count($courses); $i++){
-                $course = Course::where('_id', $courses[$i])->first();
-                $courses[$i] = $course;
-            }
-            return response()->json(['courses' => $courses]);
-        }
-        return response()->json(['courses' => 'empty']);*/
         $courses = Course::select('*')->where('instructor', $id)->get();
         return response()->json(['courses' => $courses]);
     }

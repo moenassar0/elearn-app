@@ -27,17 +27,15 @@ class AssignmentController extends Controller
     public function submitAssignment(Request $request){
         $assignment_id = $request->assignment_id;
         $assignment = Assignment::where('_id', $assignment_id)->first();
-        $student_id = $request->student_id;
+        $student_id = auth()->user()->id;
         $submission = $request->submission;
 
         $newObject = (object)array('student_id' => $student_id, 'submission' => $submission);
 
         if($assignment->submissions){
             $submissions = $assignment->submissions;
-            if(!in_array($newObject, $submissions)){
-                array_push($submissions, $newObject);
-                $assignment->submissions = $submissions;
-            }
+            array_push($submissions, $newObject);
+            $assignment->submissions = $submissions;
         }
         else{
             $submissions = $newObject;
@@ -46,5 +44,18 @@ class AssignmentController extends Controller
 
         $assignment->save();
         return response()->json(["assignment" => $assignment], 201);
+    }
+
+    public function findStudentSubmission(Request $request){
+        $assignment_id = $request->assignment_id;
+        $assignment = Assignment::where('_id', $assignment_id)->first();
+        $objs = $assignment->submissions;
+        foreach ($objs as $obj) {
+            foreach($obj as $final){
+                if($final == $request->student_id){
+                    return response()->json([true], 201);
+                }
+            }
+        }
     }
 }
