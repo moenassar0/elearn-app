@@ -9,11 +9,6 @@ use Validator;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['register', 'login']]);
-    }
-
     public function register(Request $request){
 
         //Validate user credentials 
@@ -28,16 +23,6 @@ class AuthController extends Controller
         if($validator->fails())
             return response()->json($validator->errors()->toJson(), 400);
 
-        /*$user = new User;
-
-        $user->f_name = $request->f_name;
-        $user->l_name = $request->l_name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->user_type = $request->user_type;
-
-        $user->save();*/
-
         $user = User::create(array_merge($validator->validated(), ['courses' => []],['password' => bcrypt($request->password)]));
     
         return response()->json(["result" => "ok", 'user added:' => $user], 201);
@@ -51,7 +36,6 @@ class AuthController extends Controller
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
-        //return $this->respondWithToken($token);
         return response()->json(['user' => auth()->user(), 'token' => $this->respondWithToken($token)]);
     }
 
@@ -60,11 +44,6 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function logout()
     {
         auth()->logout();
@@ -72,23 +51,11 @@ class AuthController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function refresh()
     {
         return $this->respondWithToken(auth()->refresh());
     }
 
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     protected function respondWithToken($token)
     {
         return response()->json([
