@@ -49,7 +49,7 @@ class UserController extends Controller
     public function assignCourseToInstructor(Request $request){
         $user = User::where('_id', $request->instructor_id)->first();
         //print_r($user);
-        if($user->courses){
+        /*if($user->courses){
             $courses = $user->courses;
             if(!in_array($request->course_id, $courses)){
                 array_push($courses, $request->course_id);
@@ -62,7 +62,7 @@ class UserController extends Controller
             $user->courses = $courses;
         }
 
-        $user->save();
+        $user->save();*/
         
         $course = Course::where('_id', $request->course_id)->first();
         $course->instructor = $request->instructor_id;
@@ -78,7 +78,7 @@ class UserController extends Controller
 
     public function getInstructorCourses(){
         $id = auth()->user()->id;
-        $user = User::where('_id', $id)->first();
+        /*$user = User::where('_id', $id)->first();
 
         //Using courseID fetch the course data from the course table
         if($user->courses){
@@ -89,7 +89,9 @@ class UserController extends Controller
             }
             return response()->json(['courses' => $courses]);
         }
-        return response()->json(['courses' => 'empty']);
+        return response()->json(['courses' => 'empty']);*/
+        $courses = Course::select('*')->where('instructor', $id)->get();
+        return response()->json(['courses' => $courses]);
     }
 
     public function enroll(Request $request){
@@ -122,5 +124,13 @@ class UserController extends Controller
     public function delete(Request $request){
         User::where('_id', $request->id)->delete();
         return response()->json(['message' => 'deleted user']);
+    }
+
+    public function updateUser(Request $request){
+        $user = User::where('_id', $request->id)->first();
+        $user->f_name = $request->f_name;
+        $user->l_name = $request->l_name;
+        $user->save();
+        return response()->json(['message' => 'updated user']); 
     }
 }
