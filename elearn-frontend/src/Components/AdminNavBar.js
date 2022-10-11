@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Link, Routes, Route } from 'react-router-dom';
 import { Users } from './Users';  
 
 export function AdminNavBar() {
-    console.log(window.location);
   return(
     <>
     <div className='admin-navbar'>

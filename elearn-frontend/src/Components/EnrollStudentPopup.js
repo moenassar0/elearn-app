@@ -21,7 +21,7 @@ function EnrollStudentPopup(props){
     
     //Get list of students
     const fetchData = async () => {
-        await axios.get('/auth/users');
+        const response = await axios.get('/auth/users');
         setStudents(response.data.instructors);
     }
      
