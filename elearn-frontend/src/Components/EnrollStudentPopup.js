@@ -1,8 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import React from 'react'
-import axios, { Axios } from '../api/axios';
-import PropTypes from 'prop-types';
-import { Navigate } from 'react-router-dom';
+import axios from '../api/axios';
 
 function EnrollStudentPopup(props){
 
@@ -12,18 +10,9 @@ function EnrollStudentPopup(props){
 
     const enrollStudent = async (e) => {
         e.preventDefault();
-        console.log(props.course_id, selectedStudent);
-        try{
-            setAdding(false);
-            const response = await axios.post(
-                'http://127.0.0.1:8000/api/auth/enroll', 
-                {student_id: selectedStudent, course_id: props.course_id},
-                {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
-            console.log(response.status != 200 || response.status != 201);
-            setAdding(true);
-        }
-        catch{
-        }
+        setAdding(false);
+        await axios.post('/auth/enroll', {student_id: selectedStudent, course_id: props.course_id});
+        setAdding(true);
     }
 
     useEffect(() => {
@@ -32,7 +21,7 @@ function EnrollStudentPopup(props){
     
     //Get list of students
     const fetchData = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/auth/users');
+        await axios.get('/auth/users');
         setStudents(response.data.instructors);
     }
      
