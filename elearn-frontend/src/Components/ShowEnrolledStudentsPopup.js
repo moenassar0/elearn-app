@@ -30,7 +30,7 @@ function ShowEnrolledStudentsPopup(props){
         <div className='popup'>
             <div className='popup-inner'>
             {!call && <img className='img-resize' src="../../images/loading-load.gif"></img>}
-                <button onClick={() => { props.setTrigger(false)} }className='close-btn'>Close</button>
+                <div className='popup-inner-top'><button onClick={() => { props.setTrigger(false)}} className='btn-purple'>Close</button></div>
                 <table className="main-table" id="main-table-clients">
                         <tbody>
                             <tr>

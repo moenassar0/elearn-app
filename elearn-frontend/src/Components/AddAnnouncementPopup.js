@@ -22,8 +22,8 @@ function AddAnnouncementPopup(props){
     return (props.trigger) ? (
         <div className='popup'>
             <div className='popup-inner'>
+            <div className='popup-inner-top'><button onClick={() => { props.setTrigger(false)}} className='btn-purple'>Close</button></div>
                 {!adding && <img className='img-resize' src="../../images/loading-load.gif"></img>}
-                <button onClick={() => { props.setTrigger(false)} }className='close-btn'>Close</button>
                 <input 
                     type="text"
                     ref={userRef}
