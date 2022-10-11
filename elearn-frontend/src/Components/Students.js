@@ -34,6 +34,7 @@ export function Students() {
     function callEditStudent(student){
         setEditStudentButton(true);
         setStudentToUpdate(student);
+        
     }
 
     async function deleteStudentAPI(){
@@ -47,7 +48,7 @@ export function Students() {
         <div>
             <AddUserPopup adding='Student' trigger={buttonPopup} setTrigger={setButtonPopup} setData={getData}>
             </AddUserPopup>
-            <EditUserPopup user_id={studentToUpdate._id} trigger={editStudentButton} setTrigger={setEditStudentButton} setData={getData}>
+            <EditUserPopup editing='Student' user_id={studentToUpdate._id} trigger={editStudentButton} setTrigger={setEditStudentButton} setData={getData}>
             </EditUserPopup>
             {deleteStudent && 
             <div className='popup'>
