@@ -206,7 +206,7 @@ form{
 }
 
 .main-table button{
-  width: 80%;
+  width: 50%;
   margin-bottom: 5px;
 }
 
@@ -300,6 +300,14 @@ form{
 .btn-purple:hover{
   background-color: #be4368;
   color:white;
+}
+
+.select{
+  padding: 10px;
+  border-radius: 5px;
+  width: 50%;
+  border: 2px solid #5752ac7e;
+  margin-bottom: 5px;
 }
 
 .main-button{
