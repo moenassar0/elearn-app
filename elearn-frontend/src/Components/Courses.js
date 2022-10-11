@@ -1,15 +1,15 @@
 import { useRef, useState, useEffect } from 'react';
 import React from 'react'
 import axios, { Axios } from '../api/axios';
-import PropTypes from 'prop-types';
-import { Navigate } from 'react-router-dom';
 import AddCoursePopup from './AddCoursePopup';
 import AssignCoursePopup from './AssignCoursePopup';
+import EditCoursePopup from './EditCoursePopup';
 
 export function Courses() {
 
     const [data, getData] = useState([])
     const [addCourseButton, setAddCourseButton] = useState(false);
+    const [editCourseButton, setEditCourseButton] = useState(false);
     const [assignCourseButton, setAssignCourseButton] = useState(false);
     const [currCourseID, setCurrCourseID] = useState(0);
 
@@ -27,12 +27,19 @@ export function Courses() {
         setAssignCourseButton(true)
     }
 
+    const editCourse = (course_id) => {
+        setCurrCourseID(course_id)
+        setEditCourseButton(true)
+    }
+
     return (
         <div className='container'>
             <AddCoursePopup trigger={addCourseButton} setTrigger={setAddCourseButton} setData={getData}>
             </AddCoursePopup>
             <AssignCoursePopup course_id={currCourseID} trigger={assignCourseButton} setTrigger={setAssignCourseButton} setData={getData}>
             </AssignCoursePopup>
+            <EditCoursePopup course_id={currCourseID} trigger={editCourseButton} setTrigger={setEditCourseButton} setData={getData}>
+            </EditCoursePopup>
             <div className="main-header">
                 <div className="main-header-title">
                     <span>Check out the list of courses</span>
@@ -56,7 +63,10 @@ export function Courses() {
                                     <td>{item.course_name}</td>
                                     <td>{item.course_description}</td>
                                     <td>{(item.instructor) ? item.instructor.f_name : 'None'}</td>
-                                    <td><button className='btn-purple' onClick={ () => {assignCourseToInstructor(item._id)} }>Assign Course</button></td>
+                                    <td>
+                                        <button className='btn-purple' onClick={ () => {assignCourseToInstructor(item._id)} }>Assign Course</button>
+                                        <button className='btn-purple' onClick={ () => {editCourse(item._id)} }>Edit</button>
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
