@@ -34,9 +34,16 @@ class UserController extends Controller
     }
 
     public function getStudentCourses(Request $request){
-        $user = User::where('_id', $request->_id)->first();
-
-        return response()->json([$user->courses]);
+        $id = auth()->user()->id;
+        $user = User::where('_id', $id)->first();
+        
+        //Using courseID fetch the course data from the course table
+        $courses = $user->courses;
+        for($i = 0; $i < count($courses); $i++){
+            $course = Course::where('_id', $courses[$i])->first();
+            $courses[$i] = $course;
+        }
+        return response()->json(['courses' => $courses]);
     }
 
     public function assignCourseToInstructor(Request $request){
