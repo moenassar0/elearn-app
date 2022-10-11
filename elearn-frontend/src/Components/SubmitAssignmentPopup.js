@@ -4,16 +4,21 @@ import axios from '../api/axios';
 
 function SubmitAssignmentPopup(props){
     const [submission, setSubmission] = useState('');
+    const [call, setCall] = useState(true);
     const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
 
     const handleSubmit = async (e) => {
+        setCall(false);
         e.preventDefault();
-        const response = await axios.post('auth/user/update', {id: props.user_id, f_name, l_name}, headers);
+        const response = await axios.post('auth/submit', {submission, assignment_id: props.assignment_id}, headers);
+        console.log(response);
+        setCall(true);
     }
 
     return (props.trigger) ? (
         <div className='popup'>
             <div className='popup-inner'>
+            {!call && <img className='img-resize' src="../../images/loading-load.gif"></img>}
                 <div className='popup-inner-top'>
                     <button onClick={() => { props.setTrigger(false)} } className='btn-purple'>Close</button>
                 </div>

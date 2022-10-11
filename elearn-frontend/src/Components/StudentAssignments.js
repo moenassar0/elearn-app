@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from '../api/axios';
+import SubmitAssignmentPopup from "./SubmitAssignmentPopup";
 
 export const StudentAssignments = () => {
 
@@ -7,6 +8,8 @@ export const StudentAssignments = () => {
     const [showAssignments, setShowAssignments] = useState(false);
     const [assignments, setAssignments] = useState([]);
     const [loadingForAssignments, setLoadingForAssignments] = useState(true);
+    const [currAssignmentID, setcurrAssignmentID] = useState('');
+    const [assignmentPopupButton, setAssignmnetPopupButton] = useState(false);
     const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
 
     useEffect(() => {
@@ -28,9 +31,16 @@ export const StudentAssignments = () => {
         setLoadingForAssignments(true);
     }
 
+    //Get assignmentID and open popup
+    function assignmentPopup(assignment_id){
+        setcurrAssignmentID(assignment_id);
+        setAssignmnetPopupButton(true)
+    } 
+
     return (
         <>
         <div className='container'>
+            <SubmitAssignmentPopup assignment_id={currAssignmentID} trigger={assignmentPopupButton} setTrigger={setAssignmnetPopupButton} />
             <div className="main-header">
                 <div className="main-header-title">
                     <span>Select a course to view its assignments</span>
@@ -44,13 +54,15 @@ export const StudentAssignments = () => {
                         <tbody>
                             <tr>
                                 <th>Assignment Description</th>
-                                <th>Date</th>
+                                <th>Due Date</th>
+                                <th>Submit</th>
                             </tr>
                             {!loadingForAssignments && <img className='img-resize' src="../../images/loading-load.gif"></img>}
                             {showAssignments && assignments.map((assignment) => (
                                 <tr key={assignment._id}>
                                     <td>{assignment.assignment_description}</td>
                                     <td>{assignment.date}</td>
+                                    <td><button onClick={() => {assignmentPopup(assignment._id)}}>Submit</button></td>
                                 </tr>
                             ))}
                         </tbody>
