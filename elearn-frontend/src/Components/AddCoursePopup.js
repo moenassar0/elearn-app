@@ -7,6 +7,7 @@ function AddCoursePopup(props){
     const [course_name, setCourseName] = useState('');
     const [course_code, setCourseCode] = useState('');
     const [course_description, setCourseDescription] = useState('');
+    const [adding, setAdding] = useState(true);
     
     const fetchData = async () => {
         const response = await axios.get('http://127.0.0.1:8000/api/courses');  
@@ -14,8 +15,10 @@ function AddCoursePopup(props){
     }
 
     const handleSubmit = async (e) => {
+        setAdding(false);
         e.preventDefault();
         const response = await axios.post('/auth/addcourse', {course_name, course_code, course_description});
+        setAdding(true);
         fetchData();
     }
 
@@ -23,6 +26,7 @@ function AddCoursePopup(props){
         <div className='popup'>
             <div className='popup-inner'>
             <div className='popup-inner-top'><button className='btn-purple' onClick={() => { props.setTrigger(false)} }>Close</button></div>
+            {!adding && <img className='img-resize' src="../../images/loading-load.gif"></img>}
                 <input
                     className='login-input' 
                     type="text"
