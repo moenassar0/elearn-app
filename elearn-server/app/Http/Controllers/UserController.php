@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function getStudents(){
         $users = User::where('user_type', 'Student')->get();
-        return response()->json(['instructors' => $users], 201);
+        return response()->json(['students' => $users], 201);
     }
 
     public function getInstructors(){
@@ -113,5 +113,14 @@ class UserController extends Controller
         $user->save();
         
         return response()->json(['user' => $user]);
+    }
+
+    public function test(){
+        return response()->json(['user' => auth()->user()]);
+    }
+
+    public function delete(Request $request){
+        User::where('_id', $request->id)->delete();
+        return response()->json(['message' => 'deleted user']);
     }
 }
