@@ -20,6 +20,6 @@ class AnnouncementController extends Controller
         $course_id = $request->course_id;
         $announcements = Announcement::where('course_id', $course_id)->get();
 
-        return response()->json(["announcement" => $announcements], 201);
+        return response()->json(["announcements" => $announcements], 201);
     }
 }
