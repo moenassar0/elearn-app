@@ -19,7 +19,8 @@ function AddAnnouncementPopup(props){
             <div className='popup-inner'>
             <div className='popup-inner-top'><button onClick={() => { props.setTrigger(false)}} className='btn-purple'>Close</button></div>
                 {!adding && <img className='img-resize' src="../../images/loading-load.gif"></img>}
-                <input 
+                <input
+                    className='login-input' 
                     type="text"
                     ref={userRef}
                     autoComplete="off"
@@ -29,7 +30,7 @@ function AddAnnouncementPopup(props){
                     required
                 />
                 
-                <button onClick={ handleSubmit }>Add</button>
+                <button className='btn-purple' onClick={ handleSubmit }>Add</button>
             </div>
         </div>
     ) : '';
