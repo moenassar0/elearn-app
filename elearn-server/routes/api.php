@@ -38,6 +38,8 @@ Route::group(['middleware' => ['jwt.verify'], 'prefix' => 'auth'], function($rou
     //AssignmentController
     Route::post("/assignment", [AssignmentController::class, "addAssignment"]);
     Route::post("/assignments", [AssignmentController::class, "getAssignments"]);
+    Route::post("/submit", [AssignmentController::class, "submitAssignment"]);
+    
 
     Route::post("/me", [AuthController::class, "me"]);
 });

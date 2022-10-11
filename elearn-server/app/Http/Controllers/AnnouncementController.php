@@ -22,4 +22,5 @@ class AnnouncementController extends Controller
 
         return response()->json(["announcements" => $announcements], 201);
     }
+    
 }

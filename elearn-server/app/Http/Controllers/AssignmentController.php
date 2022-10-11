@@ -23,4 +23,28 @@ class AssignmentController extends Controller
 
         return response()->json(["assignment" => $assignment], 201);
     }
+
+    public function submitAssignment(Request $request){
+        $assignment_id = $request->assignment_id;
+        $assignment = Assignment::where('_id', $assignment_id)->first();
+        $student_id = $request->student_id;
+        $submission = $request->submission;
+
+        $newObject = (object)array('student_id' => $student_id, 'submission' => $submission);
+
+        if($assignment->submissions){
+            $submissions = $assignment->submissions;
+            if(!in_array($newObject, $submissions)){
+                array_push($submissions, $newObject);
+                $assignment->submissions = $submissions;
+            }
+        }
+        else{
+            $submissions = $newObject;
+            $assignment->submissions = $submissions;
+        }
+
+        $assignment->save();
+        return response()->json(["assignment" => $assignment], 201);
+    }
 }
