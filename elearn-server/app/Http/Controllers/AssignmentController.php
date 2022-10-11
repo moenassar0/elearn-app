@@ -17,4 +17,10 @@ class AssignmentController extends Controller
         return response()->json(["assignment" => $assignment], 201);
     }
 
+    public function getAssignments(Request $request){
+        $course_id = $request->course_id;
+        $assignment = Assignment::where('course_id', $course_id)->get();
+
+        return response()->json(["assignment" => $assignment], 201);
+    }
 }
