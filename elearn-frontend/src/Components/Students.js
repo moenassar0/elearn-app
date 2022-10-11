@@ -1,11 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
 import React from 'react'
-import axios, { Axios } from '../api/axios';
-import PropTypes from 'prop-types';
-import { Navigate } from 'react-router-dom';
-import AddStudentPopup from './AddStudentPopup';
+import axios from '../api/axios';
+import AddUserPopup from './AddUserPopup';
 
-export function Users() {
+export function Students() {
 
     const [data, getData] = useState([])
  
@@ -14,9 +12,9 @@ export function Users() {
     }, [])
 
     const fetchData = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/auth/users');
-        console.log(response.data.instructors)
-        getData(response.data.instructors);
+        const response = await axios.get('/auth/students');
+        console.log(response.data.students)
+        getData(response.data.students);
     }
 
     //Usestate for button popup
@@ -24,8 +22,8 @@ export function Users() {
 
     return (
         <div>
-            <AddStudentPopup trigger={buttonPopup} setTrigger={setButtonPopup} setData={getData}>
-            </AddStudentPopup>
+            <AddUserPopup adding='Student' trigger={buttonPopup} setTrigger={setButtonPopup} setData={getData}>
+            </AddUserPopup>
             <div className='container'>
                 <div className="main-header">
                     <div className="main-header-title">
@@ -57,7 +55,5 @@ export function Users() {
                 </div>
             </div>
         </div>
-
-        
     );
-  }
+}
