@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import React from 'react'
-import axios, { Axios } from './api/axios';
-import PropTypes from 'prop-types';
+import axios from './api/axios';
 import { Navigate } from 'react-router-dom';
 
 
@@ -12,7 +11,6 @@ export default function Login() {
     const [user, setUser] = useState('');
     const [pwd, setPwd] = useState('');
     const [errMsg, setErrMsg] = useState('');
-    const [isAdmin, setAdmin] = useState(false);
     const [user_type, setUserType] = useState('');
     
     useEffect(() => {
@@ -35,9 +33,7 @@ export default function Login() {
         e.preventDefault();
         console.log(user, pwd);
         try{
-            const response = await axios.post(
-                'http://127.0.0.1:8000/api/auth/login', 
-                {'email': user, 'password': pwd} );
+            const response = await axios.post('/auth/login', {'email': user, 'password': pwd});
             console.log(response.data.user['user_type']);
             if(response.data.user['user_type'] == 'Admin'){
                 setUserType('Admin');
