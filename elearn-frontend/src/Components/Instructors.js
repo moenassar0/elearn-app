@@ -56,7 +56,7 @@ export function Instructors() {
                                         <td>{item._id}</td>
                                         <td>{item.f_name + " " + item.l_name}</td>
                                         <td>{item.email}</td>
-                                        <td><button onClick={() => {callEditInstructor(item)}}>Edit</button></td>
+                                        <td><button className='btn-purple' onClick={() => {callEditInstructor(item)}}>Edit</button></td>
                                     </tr>
                                 ))}
                             </tbody>

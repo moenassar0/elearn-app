@@ -53,10 +53,10 @@ export function Students() {
             {deleteStudent && 
             <div className='popup'>
                 <div className='popup-inner'>
-                    <div className='popup-inner-top'><button onClick={() => {setDeleteStudent(false)}}>Close</button></div>
+                    <div className='popup-inner-top'><button className='btn-purple' onClick={() => {setDeleteStudent(false)}}>Close</button></div>
                     {!loading && <img className='img-resize' src="../../images/loading-load.gif"></img>}
-                    <div>Are you sure you want to delete: {studentToDelete.f_name + " " + studentToDelete.l_name}</div>
-                    <button onClick={() => {deleteStudentAPI()}}>Delete</button>
+                    <div>Are you sure you want to delete: <b>{studentToDelete.f_name + " " + studentToDelete.l_name}</b></div>
+                    <button className='btn-purple' onClick={() => {deleteStudentAPI()}}>Delete</button>
                 </div>
             </div>}
             <div className='container'>
@@ -81,7 +81,7 @@ export function Students() {
                                         <td>{item._id}</td>
                                         <td>{item.f_name + " " + item.l_name}</td>
                                         <td>{item.email}</td>
-                                        <td><button onClick={() => {callEditStudent(item)}}>Edit</button><button onClick={() => {callDeleteStudent(item)}}>Delete</button></td>
+                                        <td><button className='btn-purple' onClick={() => {callEditStudent(item)}}>Edit</button><button className='btn-purple' onClick={() => {callDeleteStudent(item)}}>Delete</button></td>
                                     </tr>
                                 ))}
                             </tbody>
