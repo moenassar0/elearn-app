@@ -2,12 +2,15 @@ import { useRef, useState, useEffect } from 'react';
 import React from 'react'
 import axios from '../api/axios';
 import AddUserPopup from './AddUserPopup';
+import EditUserPopup from './EditUserPopup';
 
 export function Students() {
 
     const [data, getData] = useState([])
     const [deleteStudent, setDeleteStudent] = useState(false);
     const [studentToDelete, setStudentToDelete] = useState([]);
+    const [studentToUpdate, setStudentToUpdate] = useState('');
+    const [editStudentButton, setEditStudentButton] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -28,6 +31,11 @@ export function Students() {
         setStudentToDelete(student);
     }
 
+    function callEditStudent(student){
+        setEditStudentButton(true);
+        setStudentToUpdate(student);
+    }
+
     async function deleteStudentAPI(){
         setLoading(false)
         await axios.post('/auth/user/delete', {id: studentToDelete._id});
@@ -39,6 +47,8 @@ export function Students() {
         <div>
             <AddUserPopup adding='Student' trigger={buttonPopup} setTrigger={setButtonPopup} setData={getData}>
             </AddUserPopup>
+            <EditUserPopup user_id={studentToUpdate._id} trigger={editStudentButton} setTrigger={setEditStudentButton} setData={getData}>
+            </EditUserPopup>
             {deleteStudent && 
             <div className='popup'>
                 <div className='popup-inner'>
@@ -70,7 +80,7 @@ export function Students() {
                                         <td>{item._id}</td>
                                         <td>{item.f_name + " " + item.l_name}</td>
                                         <td>{item.email}</td>
-                                        <td><button>Edit</button><button onClick={() => {callDeleteStudent(item)}}>Delete</button></td>
+                                        <td><button onClick={() => {callEditStudent(item)}}>Edit</button><button onClick={() => {callDeleteStudent(item)}}>Delete</button></td>
                                     </tr>
                                 ))}
                             </tbody>
