@@ -27,10 +27,13 @@ Route::group(['middleware' => ['jwt.verify'], 'prefix' => 'auth'], function($rou
     Route::post("/assigncourse", [UserController::class, "assignCourseToInstructor"]);
     Route::post("/enroll", [UserController::class, "enroll"]);
     Route::post("/user/delete", [UserController::class, "delete"]);
+    Route::post("/user/update", [UserController::class, "updateUser"]);
 
     //CourseController
     Route::post("/enrolled", [CourseController::class, "getStudentsInCourse"]);
     Route::post("/addcourse", [CourseController::class, "addCourse"]);
+    Route::post("/course/update", [CourseController::class, "updateCourse"]);
+    
 
     Route::post("/me", [AuthController::class, "me"]);
 
