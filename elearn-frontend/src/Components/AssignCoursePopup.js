@@ -50,7 +50,7 @@ function AssignCoursePopup(props){
         <div className='popup'>
             <div className='popup-inner'>
             <div className='popup-inner-top'><button className='btn-purple' onClick={() => { props.setTrigger(false)} }>Close</button></div>
-                <select id="select-instructor" onChange={(e) => setInstructor(e.target.value)}>
+                <select className='select' id="select-instructor" onChange={(e) => setInstructor(e.target.value)}>
                     <option value="0">Select instructor:</option>
                     {instructors.map((instructor, i) => (
                         <option key={i} value={instructor._id}>{instructor.f_name + " " + instructor.l_name}</option>
