@@ -2,10 +2,13 @@ import { useRef, useState, useEffect } from 'react';
 import React from 'react'
 import axios from '../api/axios';
 import AddUserPopup from './AddUserPopup';
+import EditUserPopup from './EditUserPopup';
 
 export function Instructors() {
 
     const [data, getData] = useState([])
+    const [instructorToUpdate, setInstructorToUpdate] = useState('');
+    const [editInstructorButton, setEditInstructorButton] = useState(false);
  
     useEffect(() => {
         fetchData()
@@ -17,6 +20,11 @@ export function Instructors() {
         getData(response.data.instructors);
     }
 
+    function callEditInstructor(instructor){
+        setEditInstructorButton(true);
+        setInstructorToUpdate(instructor);
+    }
+
     //Usestate for button popup
     const [buttonPopup, setButtonPopup] = useState(false);
 
@@ -24,6 +32,8 @@ export function Instructors() {
         <div>
             <AddUserPopup adding='Instructor' trigger={buttonPopup} setTrigger={setButtonPopup} setData={getData}>
             </AddUserPopup>
+            <EditUserPopup editing='Instructor' user_id={instructorToUpdate._id} trigger={editInstructorButton} setTrigger={setEditInstructorButton} setData={getData}>
+            </EditUserPopup>
             <div className='container'>
                 <div className="main-header">
                     <div className="main-header-title">
@@ -46,7 +56,7 @@ export function Instructors() {
                                         <td>{item._id}</td>
                                         <td>{item.f_name + " " + item.l_name}</td>
                                         <td>{item.email}</td>
-                                        <td><button>Edit</button></td>
+                                        <td><button onClick={() => {callEditInstructor(item)}}>Edit</button></td>
                                     </tr>
                                 ))}
                             </tbody>
