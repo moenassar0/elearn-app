@@ -1,8 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import React from 'react'
-import axios, { Axios } from '../api/axios';
-import PropTypes from 'prop-types';
-import { Navigate } from 'react-router-dom';
+import axios from '../api/axios';
 import EnrollStudentPopup from './EnrollStudentPopup';
 import ShowEnrolledStudentsPopup from './ShowEnrolledStudentsPopup';
 import AddAnnouncementPopup from './AddAnnouncementPopup';
@@ -23,8 +21,7 @@ export function InstructorSchedule() {
 
     //Get instructor's assigned courses
     const fetchData = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/auth/instructorcourses', 
-        {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
+        const response = await axios.get('/auth/instructorcourses');
         getData(response.data.courses);
     }
 
