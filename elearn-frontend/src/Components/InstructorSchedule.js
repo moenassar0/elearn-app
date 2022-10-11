@@ -70,10 +70,10 @@ export function InstructorSchedule() {
                                     <td>{item.course_name}</td>
                                     <td>{item.course_description}</td>
                                     <td>
-                                        <button onClick={() => {addAnnouncementPopup(item._id)}}>Add Announcement</button>
-                                        <button onClick={() => {startEnrollStudentPopup(item._id)}}>Enroll</button>
-                                        <button onClick={() => {addAssignmentPopup(item._id)}}>Add Assignment</button>
-                                        <button onClick={() => {showStudentsPopup(item._id)}}>View Students</button>
+                                        <button className='btn-purple' onClick={() => {addAnnouncementPopup(item._id)}}>Add Announcement</button>
+                                        <button className='btn-purple' onClick={() => {startEnrollStudentPopup(item._id)}}>Enroll</button>
+                                        <button className='btn-purple' onClick={() => {addAssignmentPopup(item._id)}}>Add Assignment</button>
+                                        <button className='btn-purple' onClick={() => {showStudentsPopup(item._id)}}>View Students</button>
                                     </td>
                                 </tr>
                             ))}
