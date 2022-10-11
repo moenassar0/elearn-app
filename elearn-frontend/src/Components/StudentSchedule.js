@@ -2,9 +2,9 @@ import { useRef, useState, useEffect } from 'react';
 import React from 'react'
 import axios, { Axios } from '../api/axios';
 
-export function InstructorSchedule() {
+export function StudentSchedule() {
 
-    const [data, getData] = useState([])
+    const [data, setData] = useState([])
 
     useEffect(() => {
         fetchSchedule()
@@ -13,9 +13,9 @@ export function InstructorSchedule() {
     //Get instructor's assigned courses
     const fetchSchedule = async () => {
         const response = await axios.post('http://127.0.0.1:8000/api/auth/studentcourses',
-        {_id: }, 
+        {}, 
         {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
-        getData(response.data.courses);
+        setData(response.data.courses);
     }
     return (
         <div className='container'>
