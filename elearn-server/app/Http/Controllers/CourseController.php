@@ -51,4 +51,14 @@ class CourseController extends Controller
         }
         return response()->json(['students' => $students], 201);
     }
+
+    public function updateCourse(Request $request){
+        $course = Course::where('_id', $request->course_id)->first();
+        $course->course_name = $request->course_name;
+        $course->course_description = $request->course_description;
+        $course->course_code = $request->course_code;
+
+        $course->save();
+        return response()->json(["result" => "ok", 'course added:' => $course], 201);
+    }
 }
