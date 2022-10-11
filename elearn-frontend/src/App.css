@@ -244,6 +244,13 @@ form{
   overflow-y: scroll;
 }
 
+.popup-inner-top{
+  display:flex;
+  width: 100%;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
 .popup-inner .close-btn{
   position: absolute;
   top: 16px;
@@ -269,6 +276,25 @@ form{
 
 .add-user-btn button:hover{
   background-color: #FF5B8D;
+}
+
+/* Utilites */
+.btn-purple{
+  width: 40%;
+  height: 60%;
+  font-size: 1rem;
+  border-radius: 15px;
+  background-color: #FF5B8D;
+  border-color: transparent;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  align-self: center;
+}
+
+.btn-purple:hover{
+  background-color: #be4368;
+  color:white;
 }
 
 /* Responsitivity */
