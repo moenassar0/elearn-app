@@ -13,7 +13,20 @@ function EditUserPopup(props){
         e.preventDefault();
         const response = await axios.post('auth/user/update', {id: props.user_id, f_name, l_name});
         console.log(response.status != 200 || response.status != 201);
-        //fetchData();
+        fetchData();
+    }
+
+    const fetchData = async () => {
+        if(props.editing == 'Student'){
+            const response = await axios.get('/auth/students');
+            console.log(response.data.students)
+            props.setData(response.data.students);
+        }
+        else if(props.editing == 'Instructor'){
+            const response = await axios.get('/auth/instructors');
+            console.log(response.data.instructors)
+            props.setData(response.data.instructors);
+        }
     }
 
     return (props.trigger) ? (
