@@ -1,8 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import React from 'react'
-import axios, { Axios } from '../api/axios';
-import PropTypes from 'prop-types';
-import { Navigate } from 'react-router-dom';
+import axios from '../api/axios';
 
 function AddStudentPopup(props){
 
@@ -12,31 +10,27 @@ function AddStudentPopup(props){
     const [l_name, setLname] = useState('');
     const [email, setEmail] = useState('');
     const [pwd, setPwd] = useState('');
-    const [errMsg, setErrMsg] = useState('');
     
-
     const fetchData = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/auth/users');
-        console.log(response.data.instructors)
-        props.setData(response.data.instructors);
+        if(props.adding == 'Student'){
+            const response = await axios.get('/auth/students');
+            console.log(response.data.students)
+            props.setData(response.data.students);
+        }
+        else if(props.adding == 'Instructor'){
+            const response = await axios.get('/auth/instructors');
+            console.log(response.data.instructors)
+            props.setData(response.data.instructors);
+        }
     }
 
-
-        const handleSubmit = async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(f_name, l_name, email, pwd);
-        try{
-            const response = await axios.post(
-                'http://127.0.0.1:8000/api/auth/register', 
-                {f_name, l_name, email, 'password': pwd, 'user_type': 'Student'} );
-            console.log(response.status != 200 || response.status != 201);
-            fetchData();
-        }catch{
-            
-        }
-
-        //setUser('');
-        //setPwd('');
+        const user_type = props.adding;
+        const response = await axios.post('/auth/register', {f_name, l_name, email, 'password': pwd, user_type} );
+        console.log(response.status != 200 || response.status != 201);
+        fetchData();
     }
 
     return (props.trigger) ? (
@@ -82,7 +76,7 @@ function AddStudentPopup(props){
                     required
                 />
                 
-                <button onClick={handleSubmit }>Add</button>
+                <button onClick={ handleSubmit }>Add</button>
             </div>
         </div>
     ) : '';
