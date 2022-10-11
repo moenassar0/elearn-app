@@ -6,6 +6,7 @@ import { Navigate } from 'react-router-dom';
 import EnrollStudentPopup from './EnrollStudentPopup';
 import ShowEnrolledStudentsPopup from './ShowEnrolledStudentsPopup';
 import AddAnnouncementPopup from './AddAnnouncementPopup';
+import AddAssignment from './AddAssignmentPopup';
 
 export function InstructorSchedule() {
 
@@ -13,6 +14,7 @@ export function InstructorSchedule() {
     const [enrollStudentButton, setEnrollStudentButton] = useState(false);
     const [showStudentsButton, setShowStudentsButton] = useState(false);
     const [addAnnouncementButton, setAddAnnouncementButton] = useState(false);
+    const [addAssignmentButton, setAddAssignmentButton] = useState(false);
     const [currCourseID, setCurrCourseID] = useState(0);
 
     useEffect(() => {
@@ -41,11 +43,17 @@ export function InstructorSchedule() {
         setCurrCourseID(course_id);
     }
 
+    const addAssignmentPopup = (course_id) => {
+        setAddAssignmentButton(true);
+        setCurrCourseID(course_id);
+    }
+
     return (
         <div className='container'>
             {enrollStudentButton && <EnrollStudentPopup course_id={currCourseID} trigger={enrollStudentButton} setTrigger={setEnrollStudentButton} setData={getData}></EnrollStudentPopup>}
             {showStudentsButton && <ShowEnrolledStudentsPopup course_id={currCourseID} trigger={showStudentsButton} setTrigger={setShowStudentsButton}></ShowEnrolledStudentsPopup>}
             <AddAnnouncementPopup course_id={currCourseID} trigger={addAnnouncementButton} setTrigger={setAddAnnouncementButton}></AddAnnouncementPopup>
+            <AddAssignment course_id={currCourseID} trigger={addAssignmentButton} setTrigger={setAddAssignmentButton}></AddAssignment>
             <div className="main-header">
                 <div className="main-header-title">
                     <span>Check out your schedule</span>
@@ -67,7 +75,7 @@ export function InstructorSchedule() {
                                     <td>
                                         <button onClick={() => {addAnnouncementPopup(item._id)}}>Add Announcement</button>
                                         <button onClick={() => {startEnrollStudentPopup(item._id)}}>Enroll</button>
-                                        <button>Add Assignment</button>
+                                        <button onClick={() => {addAssignmentPopup(item._id)}}>Add Assignment</button>
                                         <button onClick={() => {showStudentsPopup(item._id)}}>View Students</button>
                                     </td>
                                 </tr>
