@@ -205,6 +205,11 @@ form{
   border-radius: 10px;
 }
 
+.main-table button{
+  width: 80%;
+  margin-bottom: 5px;
+}
+
 .main-table th{
   background-color: #FF5B8D;
   text-align: left;
@@ -235,8 +240,9 @@ form{
 }
 
 .popup-inner{
-  position: relative;
-  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px;
   width: 100%;
   max-height:400px;
   max-width: 640px;
@@ -244,17 +250,16 @@ form{
   overflow-y: scroll;
 }
 
+.popup-inner input{
+  margin-bottom: 5px;
+  height: 20px;
+}
+
 .popup-inner-top{
   display:flex;
   width: 100%;
   justify-content: flex-end;
   margin-bottom: 5px;
-}
-
-.popup-inner .close-btn{
-  position: absolute;
-  top: 16px;
-  right: 16px;
 }
 
 .add-user-btn{
@@ -280,7 +285,7 @@ form{
 
 /* Utilites */
 .btn-purple{
-  width: 40%;
+  width: 20%;
   height: 60%;
   font-size: 1rem;
   border-radius: 15px;
@@ -295,6 +300,26 @@ form{
 .btn-purple:hover{
   background-color: #be4368;
   color:white;
+}
+
+.main-button{
+  border-radius: 15px;
+  color: grey;
+  background-color: white;
+  width: 200px;
+  height: 75px;
+  border-color: transparent;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-style: inherit;
+  margin-right: 5px;
+}
+
+.main-button:hover{
+  background-color: #FF5B8D;
+  color:black;
+  font-weight: bolder;
 }
 
 /* Responsitivity */
