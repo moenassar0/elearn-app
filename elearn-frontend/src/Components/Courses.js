@@ -18,24 +18,7 @@ export function Courses() {
     }, [])
 
     const fetchData = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/courses');
-        //console.log(response.data.courses[1]['instructor'].f_name);
-        //response.data.courses.map(async (item, i) => {
-            //console.log(item.instructor);
-            //if(item.instructor == undefined){
-                //item.instructor_f_name = 'None';
-               // const response2 = await axios.post(
-                    //'http://127.0.0.1:8000/api/auth/user', 
-                    //{instructor_id: item.instructor},
-                    //{headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}});
-                    //console.log(response2.data.user['f_name']);
-                    //item.instructor_name = response2.data.user['f_name'] ;
-            //}
-           // else{
-               // item.instructor.f_name = 'None';
-            //}
-            
-        //})
+        const response = await axios.get('/courses');
         getData(response.data.courses);
     }
 
@@ -73,7 +56,7 @@ export function Courses() {
                                     <td>{item.course_name}</td>
                                     <td>{item.course_description}</td>
                                     <td>{(item.instructor) ? item.instructor.f_name : 'None'}</td>
-                                    <td><button onClick={ () => {assignCourseToInstructor(item._id)} }>Assign Course</button></td>
+                                    <td><button className='btn-purple' onClick={ () => {assignCourseToInstructor(item._id)} }>Assign Course</button></td>
                                 </tr>
                             ))}
                         </tbody>
