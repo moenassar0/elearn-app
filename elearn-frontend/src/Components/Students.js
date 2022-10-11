@@ -6,7 +6,10 @@ import AddUserPopup from './AddUserPopup';
 export function Students() {
 
     const [data, getData] = useState([])
- 
+    const [deleteStudent, setDeleteStudent] = useState(false);
+    const [studentToDelete, setStudentToDelete] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         fetchData()
     }, [])
@@ -20,10 +23,31 @@ export function Students() {
     //Usestate for button popup
     const [buttonPopup, setButtonPopup] = useState(false);
 
+    function callDeleteStudent(student){
+        setDeleteStudent(true);
+        setStudentToDelete(student);
+    }
+
+    async function deleteStudentAPI(){
+        setLoading(false)
+        await axios.post('/auth/user/delete', {id: studentToDelete._id});
+        fetchData();
+        setLoading(true);
+    }
+
     return (
         <div>
             <AddUserPopup adding='Student' trigger={buttonPopup} setTrigger={setButtonPopup} setData={getData}>
             </AddUserPopup>
+            {deleteStudent && 
+            <div className='popup'>
+                <div className='popup-inner'>
+                    <div className='popup-inner-top'><button onClick={() => {setDeleteStudent(false)}}>Close</button></div>
+                    {!loading && <img className='img-resize' src="../../images/loading-load.gif"></img>}
+                    <div>Are you sure you want to delete: {studentToDelete.f_name + " " + studentToDelete.l_name}</div>
+                    <button onClick={() => {deleteStudentAPI()}}>Delete</button>
+                </div>
+            </div>}
             <div className='container'>
                 <div className="main-header">
                     <div className="main-header-title">
@@ -46,7 +70,7 @@ export function Students() {
                                         <td>{item._id}</td>
                                         <td>{item.f_name + " " + item.l_name}</td>
                                         <td>{item.email}</td>
-                                        <td><button>Edit</button></td>
+                                        <td><button>Edit</button><button onClick={() => {callDeleteStudent(item)}}>Delete</button></td>
                                     </tr>
                                 ))}
                             </tbody>
