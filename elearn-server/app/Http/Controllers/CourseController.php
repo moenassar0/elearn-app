@@ -39,6 +39,8 @@ class CourseController extends Controller
 
     public function getStudentsInCourse(Request $request){
         $course_id = $request->course_id;
+        if(!isset($course_id))
+            return response()->json(['students' => ''], 400);
         $students = [];
         $allStudents = User::where('user_type', 'Student')->get();
 
