@@ -8,8 +8,10 @@ function AssignCoursePopup(props){
     const [instructors, setInstructors] = useState([]);
     const [selectedInstructor, setInstructor] = useState(0);
     const headers = {headers:{'Authorization' : "Bearer " + localStorage.getItem("token")}};
-    
+    const [adding, setAdding] = useState(true);
+
     const assignInstructor = async (e) => {
+        setAdding(false);
         e.preventDefault();
         console.log(props.course_id, selectedInstructor);
         try{
@@ -17,8 +19,10 @@ function AssignCoursePopup(props){
                 'http://127.0.0.1:8000/api/auth/assigncourse', 
                 {instructor_id: selectedInstructor, course_id: props.course_id}, headers);
             fetchCourses();
+            setAdding(true);
         }
         catch{
+            setAdding(true);
         }
     } 
 
@@ -28,13 +32,13 @@ function AssignCoursePopup(props){
     
     //Get list of instructors
     const fetchData = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/auth/instructors', headers);
+        const response = await axios.get('/auth/instructors', headers);
         console.log(response.data.instructors)
         setInstructors(response.data.instructors);
     }
 
     const fetchCourses = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/courses', headers);
+        const response = await axios.get('/auth/courses', headers);
         props.setData(response.data.courses);
     }      
 
@@ -42,6 +46,7 @@ function AssignCoursePopup(props){
         <div className='popup'>
             <div className='popup-inner'>
             <div className='popup-inner-top'><button className='btn-purple' onClick={() => { props.setTrigger(false)} }>Close</button></div>
+                {!adding && <img className='img-resize' src="../../images/loading-load.gif"></img>}
                 <select className='select' id="select-instructor" onChange={(e) => setInstructor(e.target.value)}>
                     <option value="0">Select instructor:</option>
                     {instructors.map((instructor, i) => (
